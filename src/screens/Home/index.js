@@ -7,6 +7,7 @@ import {
   Button,
   StatusBar,
 } from 'react-native';
+import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
 import {routes} from '../index';
 import styles from './styles';
@@ -19,9 +20,7 @@ const Home = ({navigation, ...props}) => {
     <SafeAreaView style={styles.root}>
       <StatusBar />
       <ScrollView bounces={false}>
-        <View>
-          <Text>Header</Text>
-        </View>
+        <AppMotto />
         <View style={styles.body}>
           <Text style={styles.headerText}>Your Vocabularies:</Text>
           <View style={styles.splitLine} />

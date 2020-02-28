@@ -1,52 +1,19 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  Button,
-  StatusBar,
-} from 'react-native';
-import AppMotto from '../../components/AppMotto';
-import VocabularyList from '../../components/VocabularyList';
-import {routes} from '../index';
-import styles from './styles';
+import {connect} from 'react-redux';
+import Home from './Home';
+import {setVocabulary} from '../../actions/vocabulary';
 
-const Home = ({navigation, ...props}) => {
-  const onPressVocabulary = vocabularyId =>
-    navigation.navigate(routes.VOCABULARY, {vocabularyId});
-
-  return (
-    <SafeAreaView style={styles.root}>
-      <StatusBar />
-      <ScrollView bounces={false}>
-        <AppMotto />
-        <View style={styles.body}>
-          <Text style={styles.headerText}>Your Vocabularies:</Text>
-          <View style={styles.splitLine} />
-          {/* vocabulary's names must be uniqe */}
-          <VocabularyList
-            items={[
-              {
-                name: 'Test Voc',
-                id: 'test-voc',
-              },
-              {
-                name: 'English words',
-                id: 'english-words',
-              },
-              {
-                name: 'English phrases',
-                id: 'english-phrases',
-              },
-            ]}
-            onPress={onPressVocabulary}
-          />
-        </View>
-      </ScrollView>
-      <Button title="Add vocabulary" onPress={() => {}} />
-    </SafeAreaView>
-  );
+const mapStateToProps = ({vocabularies}) => {
+  return {
+    vocabularies,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setVocabulary: item => dispatch(setVocabulary(item)),
+  };
 };
 
-export default Home;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);

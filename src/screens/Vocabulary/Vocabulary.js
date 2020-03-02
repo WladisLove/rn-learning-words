@@ -1,15 +1,8 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {SafeAreaView, ScrollView, View, Text, Button} from 'react-native';
 import WordModal from '../../components/modals/WordModal';
-import arrowRight from '../../assets/arrow-right.png';
+import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
+
 import styles from './styles';
 
 const Vocabulary = ({
@@ -38,19 +31,13 @@ const Vocabulary = ({
 
   return (
     <SafeAreaView style={styles.root}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={goBack} style={styles.iconWrapper}>
-          <Image source={arrowRight} style={styles.icon} />
-        </TouchableOpacity>
-        <View style={styles.vocInfoContainer}>
-          <Text style={styles.title}>{vocabulary.name}</Text>
-          <View style={styles.vocActionsContainer}>
-            <Button title="Add" onPress={openWordModal} />
-            <Button title="Edit" />
-            <Button title="Delete" onPress={onDelete} />
-          </View>
-        </View>
-      </View>
+      <VocabularyScreenHeader
+        vocabulary={vocabulary}
+        onBack={goBack}
+        onAdd={openWordModal}
+        onEdit={() => {}}
+        onDelete={onDelete}
+      />
       <ScrollView bounces={false}>
         <View style={styles.body}>
           <Text style={styles.headerText}>Your Vocabularies:</Text>

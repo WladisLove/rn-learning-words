@@ -62,7 +62,10 @@ const VocabularyScreenHeader = ({
         <Button title="Add" onPress={onAdd} />
         <Button title="Edit" onPress={onEdit} />
         <Button title="Delete" onPress={onDelete} />
+        <Button title="Run" />
+        <Button title="Download" />
       </View>
+      <Text>Find word</Text>
     </View>
   </View>
 );

@@ -1,14 +1,8 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  Button,
-  Alert,
-} from 'react-native';
+import {SafeAreaView, ScrollView, Button, Alert} from 'react-native';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
+import WordsList from '../../components/WordsList';
 
 import styles from './styles';
 
@@ -50,13 +44,8 @@ const Vocabulary = ({
         onEdit={() => {}}
         onDelete={onDelete}
       />
-      <ScrollView bounces={false}>
-        <View style={styles.body}>
-          <Text style={styles.headerText}>Your Vocabularies:</Text>
-          <Text style={styles.headerText}>Your Vocabularies:</Text>
-          <Text style={styles.headerText}>Your Vocabularies:</Text>
-          {/*<VocabularyList items={[]} onPress={() => {}} />*/}
-        </View>
+      <ScrollView bounces={false} contentContainerStyle={styles.body}>
+        <WordsList items={vocabulary.words} />
       </ScrollView>
       <Button title="Add word" onPress={openWordModal} />
       <WordModal

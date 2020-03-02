@@ -21,6 +21,20 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         vocabularies: {...newVocabularies},
       };
+    case aTypes.SET_WORD:
+      return {
+        ...state,
+        vocabularies: {
+          ...state.vocabularies,
+          [action.vocabularyId]: {
+            ...state.vocabularies[action.vocabularyId],
+            words: {
+              ...(state.vocabularies[action.vocabularyId].words || {}),
+              [action.id]: action.item,
+            },
+          },
+        },
+      };
     default:
       return state;
   }

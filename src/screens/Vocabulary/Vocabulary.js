@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import WordModal from '../../components/modals/WordModal';
 import arrowRight from '../../assets/arrow-right.png';
 import styles from './styles';
 
@@ -16,13 +17,25 @@ const Vocabulary = ({
   vocabularyId,
   navigation,
   deleteVocabulary,
+  setWord,
 }) => {
+  const [wordModalVisible, setWordModalVisible] = useState(false);
+  const openWordModal = () => setWordModalVisible(true);
+  const closeWordModal = () => setWordModalVisible(false);
+
   const goBack = () => navigation.goBack();
   const onDelete = () => {
     deleteVocabulary(vocabularyId);
     goBack();
   };
-  console.log(vocabulary);
+
+  const onSetWord = word => {
+    setWord(word, vocabularyId);
+    closeWordModal();
+  };
+
+  console.log('vocabulary', vocabulary);
+
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.headerContainer}>
@@ -32,7 +45,7 @@ const Vocabulary = ({
         <View style={styles.vocInfoContainer}>
           <Text style={styles.title}>{vocabulary.name}</Text>
           <View style={styles.vocActionsContainer}>
-            <Button title="Add" />
+            <Button title="Add" onPress={openWordModal} />
             <Button title="Edit" />
             <Button title="Delete" onPress={onDelete} />
           </View>
@@ -46,7 +59,12 @@ const Vocabulary = ({
           {/*<VocabularyList items={[]} onPress={() => {}} />*/}
         </View>
       </ScrollView>
-      <Button title="Add vocabulary" onPress={() => {}} />
+      <Button title="Add word" onPress={openWordModal} />
+      <WordModal
+        visible={wordModalVisible}
+        onSave={onSetWord}
+        onClose={closeWordModal}
+      />
     </SafeAreaView>
   );
 };

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View, Text, Button} from 'react-native';
 import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
-import VocabularyModal from '../../components/VocabularyModal';
+import VocabularyModal from '../../components/modals/VocabularyModal';
 import {routes} from '../index';
 import styles from './styles';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,20 +9,21 @@ import {
 } from 'react-native';
 import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
+import VocabularyModal from '../../components/VocabularyModal';
 import {routes} from '../index';
 import styles from './styles';
 
 const Home = ({vocabularies, setVocabulary, navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
   const onPressVocabulary = vocabularyId =>
     navigation.navigate(routes.VOCABULARY, {vocabularyId});
 
-  const onAddVocabulary = () => {
-    console.log('onAddVocabulary')
-    /*const num = Math.floor(Math.random() * 100) + 1;
-    setVocabulary({
-      name: `Kek ${num}`,
-      id: `kek-${num}`,
-    });*/
+  const onSaveVocabulary = voc => {
+    console.log('onAddVocabulary', voc);
+    setVocabulary(voc);
+    setModalVisible(false);
   };
 
   return (
@@ -33,11 +34,16 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
         <View style={styles.body}>
           <Text style={styles.headerText}>Your Vocabularies:</Text>
           <View style={styles.splitLine} />
-          {/* vocabulary's names must be uniqe */}
           <VocabularyList items={vocabularies} onPress={onPressVocabulary} />
         </View>
       </ScrollView>
-      <Button title="Add vocabulary" onPress={onAddVocabulary} />
+      <Button title="Add vocabulary" onPress={showModal} />
+      <VocabularyModal
+        visible={modalVisible}
+        onSave={onSaveVocabulary}
+        onClose={closeModal}
+        items={vocabularies}
+      />
     </SafeAreaView>
   );
 };

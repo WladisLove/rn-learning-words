@@ -1,16 +1,22 @@
-import React from 'react';
-import {View, Text, Button} from 'react-native';
-import styles from './styles';
+import {connect} from 'react-redux';
+import Vocabulary from './Vocabulary';
+import {setVocabulary} from '../../actions/vocabulary';
 
-const Home = ({navigation, route, ...props}) => {
-  const {vocabularyId} = route.params;
-  return (
-    <View style={styles.root}>
-      <Text>Details Screen</Text>
-      <Text>itemId: {JSON.stringify(vocabularyId)}</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
+const mapStateToProps = ({vocabularies}, {route: {params = {}}}) => {
+  const {vocabularyId} = params;
+  return {
+    vocabulary: vocabularies[vocabularyId],
+    vocabularyId,
+  };
 };
 
-export default Home;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    //setVocabulary: item => dispatch(setVocabulary(item)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Vocabulary);

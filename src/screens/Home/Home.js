@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  Button,
-  StatusBar,
-} from 'react-native';
+import {SafeAreaView, ScrollView, View, Text, Button} from 'react-native';
 import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
 import VocabularyModal from '../../components/VocabularyModal';
@@ -28,13 +21,16 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
 
   return (
     <SafeAreaView style={styles.root}>
-      <StatusBar />
+      {/*<StatusBar />*/}
       <ScrollView bounces={false}>
         <AppMotto />
         <View style={styles.body}>
           <Text style={styles.headerText}>Your Vocabularies:</Text>
           <View style={styles.splitLine} />
-          <VocabularyList items={vocabularies} onPress={onPressVocabulary} />
+          <VocabularyList
+            vocabularies={vocabularies}
+            onPress={onPressVocabulary}
+          />
         </View>
       </ScrollView>
       <Button title="Add vocabulary" onPress={showModal} />

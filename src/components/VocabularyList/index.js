@@ -24,21 +24,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const VocabularyList = ({items = [], onPress}) => {
+const VocabularyList = ({vocabularies = {}, onPress}) => {
   const pressHandler = id => () => onPress(id);
-  return (
-    <View>
-      {items.map(item => (
-        <TouchableOpacity
-          key={item.id}
-          onPress={pressHandler(item.id)}
-          style={styles.container}>
-          <Text style={styles.text}>{item.name}</Text>
-          <Image source={arrowRight} style={styles.icon} />
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
+
+  let items = [];
+  for (let [id, item] of Object.entries(vocabularies)) {
+    items.push(
+      <TouchableOpacity
+        key={id}
+        onPress={pressHandler(id)}
+        style={styles.container}>
+        <Text style={styles.text}>{item.name}</Text>
+        <Image source={arrowRight} style={styles.icon} />
+      </TouchableOpacity>,
+    );
+  }
+
+  return <View>{items}</View>;
 };
 
 export default VocabularyList;

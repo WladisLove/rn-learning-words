@@ -1,7 +1,7 @@
 import aTypes from '../actions/actionTypes';
 
 const initialState = {
-  vocabularies: [],
+  vocabularies: {},
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -9,7 +9,10 @@ export default function reducer(state = initialState, action = {}) {
     case aTypes.SET_VOCABULARY:
       return {
         ...state,
-        vocabularies: [...state.vocabularies, action.item],
+        vocabularies: {
+          ...state.vocabularies,
+          [action.id]: {...state.vocabularies[action.id], ...action.item},
+        },
       };
     default:
       return state;

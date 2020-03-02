@@ -39,16 +39,14 @@ const VocabularyModal = ({visible, items, onSave, onClose}) => {
 
   const onSubmit = values => {
     const name = values.name.trim();
-    const nameLowCase = name.toLowerCase();
-    let isUnique = !items.some(
-      vocabulary => vocabulary.name.toLowerCase() === nameLowCase,
-    );
+    const id = name.toLowerCase().replace(/ /gi, '-');
+    let isUnique = !Object.keys(items).some(itemId => itemId === id);
     if (!isUnique) {
       return {[FORM_ERROR]: "Name isn't unique"};
     }
     onSave({
       name,
-      id: nameLowCase.replace(/ /gi, '-'),
+      id,
     });
   };
 

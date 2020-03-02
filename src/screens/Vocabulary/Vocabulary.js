@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, View, Text, Button} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  Button,
+  Alert,
+} from 'react-native';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 
@@ -17,10 +24,15 @@ const Vocabulary = ({
   const closeWordModal = () => setWordModalVisible(false);
 
   const goBack = () => navigation.goBack();
-  const onDelete = () => {
+  const deleteHandler = () => {
     deleteVocabulary(vocabularyId);
     goBack();
   };
+  const onDelete = () =>
+    Alert.alert('Do you want to delete vocabulary?', '', [
+      {text: 'Cancel', style: 'cancel'},
+      {text: 'Delete', onPress: deleteHandler},
+    ]);
 
   const onSetWord = word => {
     setWord(word, vocabularyId);

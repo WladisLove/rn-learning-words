@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Vocabulary from './Vocabulary';
-import {setVocabulary} from '../../actions/vocabulary';
+import {deleteVocabulary} from '../../actions/vocabulary';
 
 const mapStateToProps = ({vocabularies}, {route: {params = {}}}) => {
   const {vocabularyId} = params;
@@ -10,9 +10,9 @@ const mapStateToProps = ({vocabularies}, {route: {params = {}}}) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
-    //setVocabulary: item => dispatch(setVocabulary(item)),
+    deleteVocabulary: id => dispatch(deleteVocabulary(id)),
   };
 };
 

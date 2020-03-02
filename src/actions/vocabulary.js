@@ -5,3 +5,8 @@ export const setVocabulary = ({id, ...item}) => ({
   id,
   item,
 });
+
+export const deleteVocabulary = id => ({
+  type: aTypes.DELETE_VOCABULARY,
+  id,
+});

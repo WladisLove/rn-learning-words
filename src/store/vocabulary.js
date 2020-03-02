@@ -14,6 +14,13 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: {...state.vocabularies[action.id], ...action.item},
         },
       };
+    case aTypes.DELETE_VOCABULARY:
+      const newVocabularies = {...state.vocabularies};
+      delete newVocabularies[action.id];
+      return {
+        ...state,
+        vocabularies: {...newVocabularies},
+      };
     default:
       return state;
   }

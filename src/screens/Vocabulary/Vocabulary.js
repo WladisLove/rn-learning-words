@@ -11,9 +11,18 @@ import {
 import arrowRight from '../../assets/arrow-right.png';
 import styles from './styles';
 
-const Vocabulary = ({vocabulary, vocabularyId, navigation, ...props}) => {
+const Vocabulary = ({
+  vocabulary = {},
+  vocabularyId,
+  navigation,
+  deleteVocabulary,
+}) => {
   const goBack = () => navigation.goBack();
-  console.log(vocabulary)
+  const onDelete = () => {
+    deleteVocabulary(vocabularyId);
+    goBack();
+  };
+  console.log(vocabulary);
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.headerContainer}>
@@ -25,7 +34,7 @@ const Vocabulary = ({vocabulary, vocabularyId, navigation, ...props}) => {
           <View style={styles.vocActionsContainer}>
             <Button title="Add" />
             <Button title="Edit" />
-            <Button title="Delete" />
+            <Button title="Delete" onPress={onDelete} />
           </View>
         </View>
       </View>

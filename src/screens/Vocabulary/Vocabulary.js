@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, Button, Alert} from 'react-native';
+import RNFS from 'react-native-fs';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
@@ -33,6 +34,29 @@ const Vocabulary = ({
     closeWordModal();
   };
 
+  const onDownload = () => {
+    // TODO: set correct directory for saving
+
+    let path = RNFS.DocumentDirectoryPath;
+    //let path = '/Users/uklimiankou/Documents' + '/test2.json';
+    console.log(path);
+    let obj = {test: 'test object 3'};
+    // RNFS.mkdir(path)
+    //   .then(result => {
+    //     console.log('result', result);
+    RNFS.writeFile(path + '/test2.json', JSON.stringify(obj), 'utf8')
+      .then(success => {
+        Alert.alert('FILE WRITTEN!', `${success}`);
+      })
+      .catch(err => {
+        Alert.alert('Write error!', `${err.message}`);
+      });
+    // })
+    // .catch(err => {
+    //   console.warn('err', err);
+    // });
+  };
+
   console.log('vocabulary', vocabulary);
 
   return (
@@ -43,6 +67,7 @@ const Vocabulary = ({
         onAdd={openWordModal}
         onEdit={() => {}}
         onDelete={onDelete}
+        onDownload={onDownload}
       />
       <ScrollView bounces={false} contentContainerStyle={styles.body}>
         <WordsList items={vocabulary.words} />

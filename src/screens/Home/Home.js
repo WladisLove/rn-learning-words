@@ -4,6 +4,7 @@ import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
 import VocabularyModal from '../../components/modals/VocabularyModal';
 import {routes} from '../index';
+import {loadVocabulary} from '../../utils';
 import styles from './styles';
 
 const Home = ({vocabularies, setVocabulary, navigation}) => {
@@ -17,6 +18,12 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
     console.log('onAddVocabulary', voc);
     setVocabulary(voc);
     setModalVisible(false);
+  };
+
+  const onLoadVocabulary = () => {
+    // TODO: add loading state while processing new vocabulary
+    const finishLoading = () => console.log('finished');
+    loadVocabulary(Object.keys(vocabularies), setVocabulary, finishLoading);
   };
 
   return (
@@ -34,6 +41,7 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
         </View>
       </ScrollView>
       <Button title="Add vocabulary" onPress={showModal} />
+      <Button title="Upload vocabulary" onPress={onLoadVocabulary} />
       <VocabularyModal
         visible={modalVisible}
         onSave={onSaveVocabulary}

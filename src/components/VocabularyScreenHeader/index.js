@@ -51,6 +51,7 @@ const VocabularyScreenHeader = ({
   onAdd,
   onEdit,
   onDelete,
+  onDownload,
 }) => (
   <View style={styles.headerContainer}>
     <TouchableOpacity onPress={onBack} style={styles.iconWrapper}>
@@ -63,7 +64,7 @@ const VocabularyScreenHeader = ({
         <Button title="Edit" onPress={onEdit} />
         <Button title="Delete" onPress={onDelete} />
         <Button title="Run" />
-        <Button title="Download" />
+        <Button title="Download" onPress={onDownload} />
       </View>
       <Text>Find word</Text>
     </View>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, Button, Alert} from 'react-native';
+import {SafeAreaView, Button, Alert} from 'react-native';
 import RNFS from 'react-native-fs';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
@@ -69,9 +69,7 @@ const Vocabulary = ({
         onDelete={onDelete}
         onDownload={onDownload}
       />
-      <ScrollView bounces={false} contentContainerStyle={styles.body}>
-        <WordsList items={vocabulary.words} />
-      </ScrollView>
+      <WordsList items={vocabulary.words} />
       <Button title="Add word" onPress={openWordModal} />
       <WordModal
         visible={wordModalVisible}

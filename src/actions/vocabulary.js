@@ -11,9 +11,9 @@ export const deleteVocabulary = id => ({
   id,
 });
 
-export const setWord = ({id, ...item}, vocabularyId) => ({
+export const setWord = (item, vocabularyId) => ({
   type: aTypes.SET_WORD,
   vocabularyId,
-  id,
+  id: item.id,
   item,
 });

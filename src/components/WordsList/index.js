@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {black, navy_dark} from '../../color';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {black, navy_dark, silver} from '../../color';
 
 const styles = StyleSheet.create({
+  body: {flex: 1, backgroundColor: silver},
   listItem: {
     flexDirection: 'row',
     height: 100,
@@ -26,18 +27,21 @@ const styles = StyleSheet.create({
 });
 
 const WordsList = ({items = {}}) => {
-  let elements = [];
-  for (let [id, item] of Object.entries(items)) {
-    elements.push(
-      <View key={id} style={styles.listItem}>
-        <Text style={[styles.text, styles.word]}>{item.word}</Text>
-        <Text style={styles.dot}>•</Text>
-        <Text style={[styles.text, styles.meaning]}>{item.meaning}</Text>
-      </View>,
-    );
-  }
-
-  return <>{elements}</>;
+  return (
+    <FlatList
+      bounces={false}
+      style={styles.body}
+      data={Object.values(items)}
+      renderItem={({item}) => (
+        <View style={styles.listItem}>
+          <Text style={[styles.text, styles.word]}>{item.word}</Text>
+          <Text style={styles.dot}>•</Text>
+          <Text style={[styles.text, styles.meaning]}>{item.meaning}</Text>
+        </View>
+      )}
+      keyExtractor={item => item.id}
+    />
+  );
 };
 
 export default WordsList;

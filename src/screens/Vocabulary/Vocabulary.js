@@ -46,7 +46,8 @@ const Vocabulary = ({
     //     console.log('result', result);
     RNFS.writeFile(path + '/test2.json', JSON.stringify(obj), 'utf8')
       .then(success => {
-        Alert.alert('FILE WRITTEN!', `${success}`);
+        // RNFS.DownloadDirectoryPath - Android only
+        Alert.alert('FILE WRITTEN!', `${path}\n${RNFS.DownloadDirectoryPath}`);
       })
       .catch(err => {
         Alert.alert('Write error!', `${err.message}`);

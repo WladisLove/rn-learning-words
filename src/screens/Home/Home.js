@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SafeAreaView, ScrollView, View, Text, Button} from 'react-native';
 import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
 import VocabularyModal from '../../components/modals/VocabularyModal';
 import {routes} from '../index';
-import {loadVocabulary} from '../../utils';
+import {loadVocabulary} from '../../helpers';
+import useModal from '../../helpers/useModal';
 import styles from './styles';
 
 const Home = ({vocabularies, setVocabulary, navigation}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const showModal = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
+  const [modalVisible, showModal, closeModal] = useModal(false);
+
   const onPressVocabulary = vocabularyId =>
     navigation.navigate(routes.VOCABULARY, {vocabularyId});
 
   const onSaveVocabulary = voc => {
     console.log('onAddVocabulary', voc);
     setVocabulary(voc);
-    setModalVisible(false);
+    closeModal();
   };
 
   const onLoadVocabulary = () => {

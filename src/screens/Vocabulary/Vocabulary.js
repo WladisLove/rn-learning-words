@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SafeAreaView, Button, Alert} from 'react-native';
 import RNFS from 'react-native-fs';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
+import useModal from '../../helpers/useModal';
 
 import styles from './styles';
 
@@ -14,9 +15,7 @@ const Vocabulary = ({
   deleteVocabulary,
   setWord,
 }) => {
-  const [wordModalVisible, setWordModalVisible] = useState(false);
-  const openWordModal = () => setWordModalVisible(true);
-  const closeWordModal = () => setWordModalVisible(false);
+  const [wordModalVisible, openWordModal, closeWordModal] = useModal(false);
 
   const goBack = () => navigation.goBack();
   const deleteHandler = () => {

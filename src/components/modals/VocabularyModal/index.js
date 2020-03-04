@@ -5,7 +5,7 @@ import Modal from '../Modal';
 import FormInput from '../../FormInput';
 
 import {FORM_ERROR} from 'final-form';
-import {generateVocabularyID} from '../../../utils';
+import {generateVocabularyID} from '../../../helpers';
 import {red} from '../../../color';
 
 const styles = StyleSheet.create({

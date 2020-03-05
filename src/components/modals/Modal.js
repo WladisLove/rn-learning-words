@@ -52,8 +52,8 @@ const Modal = ({
             {children}
           </ScrollView>
           <View style={styles.btnContainer}>
-            <Button title={cancelText} onPress={onCancel} />
-            <Button title={okText} onPress={onOk} />
+            {onCancel && <Button title={cancelText} onPress={onCancel} />}
+            {onOk && <Button title={okText} onPress={onOk} />}
           </View>
         </View>
       </SafeAreaView>

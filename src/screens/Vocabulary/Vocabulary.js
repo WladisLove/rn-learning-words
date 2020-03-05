@@ -14,9 +14,11 @@ const Vocabulary = ({
   navigation,
   deleteVocabulary,
   setWord,
+  deleteWord,
 }) => {
+  const {words = {}} = vocabulary;
   const [wordModalVisible, openWordModal, closeWordModal] = useModal(false);
-  const [selectedWord, selectWord] = useState(null);
+  const [selectedWordID, selectWordID] = useState(null);
 
   const goBack = () => navigation.goBack();
   const deleteHandler = () => {
@@ -32,12 +34,19 @@ const Vocabulary = ({
   const onSetWord = word => {
     setWord(word, vocabularyId);
     closeWordModal();
-    selectWord(null);
+    selectWordID(null);
   };
 
-  const onCloseModal = () => {
+  const onCloseWord = () => {
     closeWordModal();
-    selectWord(null);
+    selectWordID(null);
+  };
+
+  const onUpdateWord = word => setWord(word, vocabularyId);
+
+  const onDeleteWord = () => {
+    selectedWordID && deleteWord(selectedWordID, vocabularyId);
+    onCloseWord();
   };
 
   const onDownload = () => {
@@ -64,12 +73,14 @@ const Vocabulary = ({
     // });
   };
 
-  const onWordPress = word => {
-    selectWord(word);
+  const onWordPress = wordID => {
+    selectWordID(wordID);
     openWordModal();
   };
 
   console.log('vocabulary', vocabulary);
+
+  const selectedWord = selectedWordID ? words[selectedWordID] : null;
 
   return (
     <SafeAreaView style={styles.root}>
@@ -81,13 +92,15 @@ const Vocabulary = ({
         onDelete={onDelete}
         onDownload={onDownload}
       />
-      <WordsList items={vocabulary.words} onWordPress={onWordPress} />
+      <WordsList items={words} onWordPress={onWordPress} />
       <Button title="Add word" onPress={openWordModal} />
       <WordModal
         visible={wordModalVisible}
         word={selectedWord}
         onSave={onSetWord}
-        onClose={onCloseModal}
+        onClose={onCloseWord}
+        onUpdate={onUpdateWord}
+        onDelete={onDeleteWord}
       />
     </SafeAreaView>
   );

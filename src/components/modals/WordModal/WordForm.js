@@ -10,15 +10,40 @@ const styles = StyleSheet.create({
   errorTip: {color: red, fontSize: 16},
 });
 
+export const wordFields = ['word', 'meaning', 'synonyms', 'context'];
+const fieldsConfig = {
+  word: {
+    placeholder: 'Word',
+    inputProps: {
+      label: 'Word:',
+    },
+  },
+  meaning: {
+    placeholder: 'Meaning',
+    inputProps: {
+      label: 'Meaning:',
+    },
+  },
+  synonyms: {
+    placeholder: 'Synonyms',
+    inputProps: {
+      label: 'Synonyms:',
+      multiline: true,
+    },
+  },
+  context: {
+    placeholder: 'Context',
+    inputProps: {
+      label: 'Context:',
+      multiline: true,
+    },
+  },
+};
+
 export let submitExternal = () => {};
 
 const WordForm = ({word, onSave}) => {
-  const {
-    word: dWord = '',
-    meaning: dMeaning = '',
-    synonyms: dSynonyms = '',
-    context: dContext = '',
-  } = word || {};
+  const witWord = Boolean(word);
 
   const onValidate = values => ({
     word: !values.word ? 'Required' : undefined,
@@ -26,7 +51,7 @@ const WordForm = ({word, onSave}) => {
   });
 
   const onSubmit = values =>
-    onSave({...values, id: word ? word.id : generateWordID(values.word)});
+    onSave({...values, id: witWord ? word.id : generateWordID(values.word)});
 
   return (
     <Form
@@ -36,25 +61,20 @@ const WordForm = ({word, onSave}) => {
         submitExternal = handleSubmit;
         return (
           <>
-            <Field name="word" placeholder="Word" initialValue={dWord}>
-              {fieldProps => <FormInput {...fieldProps} label="Word:" />}
-            </Field>
-            <Field name="meaning" placeholder="Meaning" initialValue={dMeaning}>
-              {fieldProps => <FormInput {...fieldProps} label="Meaning:" />}
-            </Field>
-            <Field
-              name="synonyms"
-              placeholder="Synonyms"
-              initialValue={dSynonyms}>
-              {fieldProps => (
-                <FormInput {...fieldProps} label="Synonyms:" multiline={true} />
-              )}
-            </Field>
-            <Field name="context" placeholder="Context" initialValue={dContext}>
-              {fieldProps => (
-                <FormInput {...fieldProps} label="Context:" multiline={true} />
-              )}
-            </Field>
+            {wordFields.map(name => {
+              let conf = fieldsConfig[name];
+              return (
+                <Field
+                  key={name}
+                  name={name}
+                  placeholder={conf.placeholder}
+                  initialValue={witWord ? word[name] : undefined}>
+                  {fieldProps => (
+                    <FormInput {...fieldProps} {...conf.inputProps} />
+                  )}
+                </Field>
+              );
+            })}
             {submitError && <Text style={styles.errorTip}>{submitError}</Text>}
           </>
         );

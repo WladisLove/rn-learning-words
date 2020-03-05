@@ -39,7 +39,7 @@ const WordsList = ({items = {}, onWordPress = () => {}}) => {
       renderItem={({item}) => (
         <TouchableOpacity
           style={styles.listItem}
-          onPress={onWordPress.bind(null, item)}>
+          onPress={onWordPress.bind(null, item.id)}>
           <Text style={[styles.text, styles.word]}>{item.word}</Text>
           <Text style={styles.dot}>•</Text>
           <Text style={[styles.text, styles.meaning]}>{item.meaning}</Text>

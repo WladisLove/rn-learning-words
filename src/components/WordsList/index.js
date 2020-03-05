@@ -1,18 +1,22 @@
 import React from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import {black, navy_dark, silver} from '../../color';
 
 const styles = StyleSheet.create({
   body: {flex: 1, backgroundColor: silver},
   listItem: {
     flexDirection: 'row',
-    height: 100,
+    maxHeight: 90,
+    minHeight: 70,
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderBottomColor: black,
-    borderBottomWidth: 1,
+  },
+  separator: {
+    backgroundColor: black,
+    flex: 1,
+    height: 1,
   },
   text: {
     fontSize: 18,
@@ -26,19 +30,22 @@ const styles = StyleSheet.create({
   meaning: {flex: 0.44, textAlign: 'right'},
 });
 
-const WordsList = ({items = {}}) => {
+const WordsList = ({items = {}, onWordPress = () => {}}) => {
   return (
     <FlatList
       bounces={false}
       style={styles.body}
       data={Object.values(items)}
       renderItem={({item}) => (
-        <View style={styles.listItem}>
+        <TouchableOpacity
+          style={styles.listItem}
+          onPress={onWordPress.bind(null, item)}>
           <Text style={[styles.text, styles.word]}>{item.word}</Text>
           <Text style={styles.dot}>•</Text>
           <Text style={[styles.text, styles.meaning]}>{item.meaning}</Text>
-        </View>
+        </TouchableOpacity>
       )}
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
       keyExtractor={item => item.id}
     />
   );

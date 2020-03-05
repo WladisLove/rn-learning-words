@@ -4,6 +4,14 @@ import RNFS from 'react-native-fs';
 export const generateVocabularyID = name =>
   name.toLowerCase().replace(/ /gi, '-');
 
+export const generateWordID = word => {
+  const idStr = word.toLowerCase().replace(/ /gi, '-');
+  const idDate = Date.now()
+    .toString()
+    .slice(-7, -2);
+  return `${idStr}-${idDate}`;
+};
+
 const checkVocabularyStructure = voc => {
   if (!voc.name) {
     throw Error("Vocabulary doesn't have name field");

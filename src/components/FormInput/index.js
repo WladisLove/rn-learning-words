@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
     borderColor: gray,
     borderWidth: 1,
   },
+  defaultMultipletextInput: {
+    height: 'auto',
+    minHeight: 54,
+  },
   errorInput: {borderColor: red},
   tooltip: {
     position: 'absolute',
@@ -34,7 +38,7 @@ const FormInput = ({
   meta,
   placeholder,
   multiline = false,
-  numberOfLines = 1,
+  numberOfLines,
   label,
 }) => {
   const isError = meta.error && meta.touched;
@@ -51,7 +55,10 @@ const FormInput = ({
         placeholderTextColor={gray}
         style={[
           styles.textInput,
-          multiline && {height: LINE_H * 1.2 * numberOfLines},
+          multiline &&
+            (numberOfLines
+              ? {height: LINE_H * 1.2 * numberOfLines}
+              : styles.defaultMultipletextInput),
           isError && styles.errorInput,
         ]}
       />

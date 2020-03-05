@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, Button, Alert} from 'react-native';
 import RNFS from 'react-native-fs';
 import WordModal from '../../components/modals/WordModal';
@@ -16,6 +16,7 @@ const Vocabulary = ({
   setWord,
 }) => {
   const [wordModalVisible, openWordModal, closeWordModal] = useModal(false);
+  const [selectedWord, selectWord] = useState(null);
 
   const goBack = () => navigation.goBack();
   const deleteHandler = () => {
@@ -31,6 +32,12 @@ const Vocabulary = ({
   const onSetWord = word => {
     setWord(word, vocabularyId);
     closeWordModal();
+    selectWord(null);
+  };
+
+  const onCloseModal = () => {
+    closeWordModal();
+    selectWord(null);
   };
 
   const onDownload = () => {
@@ -57,6 +64,11 @@ const Vocabulary = ({
     // });
   };
 
+  const onWordPress = word => {
+    selectWord(word);
+    openWordModal();
+  };
+
   console.log('vocabulary', vocabulary);
 
   return (
@@ -69,12 +81,13 @@ const Vocabulary = ({
         onDelete={onDelete}
         onDownload={onDownload}
       />
-      <WordsList items={vocabulary.words} />
+      <WordsList items={vocabulary.words} onWordPress={onWordPress} />
       <Button title="Add word" onPress={openWordModal} />
       <WordModal
         visible={wordModalVisible}
+        word={selectedWord}
         onSave={onSetWord}
-        onClose={closeWordModal}
+        onClose={onCloseModal}
       />
     </SafeAreaView>
   );

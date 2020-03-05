@@ -1,10 +1,14 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {wordFields} from './WordForm';
+import {navy_dark} from '../../../color';
 
 const styles = StyleSheet.create({
   mainField: {
     textAlign: 'center',
+    fontSize: 21,
+    fontWeight: '500',
+    color: navy_dark,
   },
   mainSeparator: {
     fontSize: 32,
@@ -12,19 +16,15 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   fstSection: {marginTop: 15},
-  section: {
-    marginBottom: 7,
-  },
-  sectionTitle: {},
-  sectionText: {
-    fontSize: 18,
-  },
+  section: {marginBottom: 12},
+  sectionTitle: {fontSize: 14, marginBottom: 5, paddingLeft: 5},
+  sectionText: {fontSize: 18},
   btnContainer: {flexDirection: 'row', justifyContent: 'flex-end'},
 });
 
 const [, , ...restFields] = wordFields; // skip 'word' and 'meaning' fields
 
-const VocabularyModal = ({word = {}, onEdit, onDelete}) => {
+const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
   return (
     <View>
       <Text style={styles.mainField}>{word.word}</Text>
@@ -36,7 +36,7 @@ const VocabularyModal = ({word = {}, onEdit, onDelete}) => {
             key={name}
             style={[styles.section, i === 0 && styles.fstSection]}>
             <Text style={styles.sectionTitle}>
-              {name.charAt(0).toUpperCase() + name.slice(1)}:
+              - {name.charAt(0).toUpperCase() + name.slice(1)}
             </Text>
             <Text style={styles.sectionText}>{word[name]}</Text>
           </View>
@@ -50,4 +50,4 @@ const VocabularyModal = ({word = {}, onEdit, onDelete}) => {
   );
 };
 
-export default VocabularyModal;
+export default WordInfoArea;

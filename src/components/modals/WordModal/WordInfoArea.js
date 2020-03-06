@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import Button from '../../Button';
 import {wordFields} from './WordForm';
 import {navy_dark} from '../../../color';
 
@@ -43,8 +44,10 @@ const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
         ) : null;
       })}
       <View style={styles.btnContainer}>
-        <Button title="Edit" onPress={onEdit} />
-        <Button title="Delete" onPress={onDelete} />
+        <Button onPress={onEdit} style={{marginRight: 10}}>
+          Edit
+        </Button>
+        <Button onPress={onDelete}>Delete</Button>
       </View>
     </View>
   );

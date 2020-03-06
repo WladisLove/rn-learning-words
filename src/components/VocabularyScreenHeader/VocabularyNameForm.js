@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {View, Button} from 'react-native';
+import {View} from 'react-native';
 import {Form, Field} from 'react-final-form';
 import FormInput from '../FormInput';
+import Button from '../Button';
 import {generateVocabularyID, isVocIdUnique} from '../../helpers';
 import {FORM_ERROR} from 'final-form';
 
@@ -50,8 +51,8 @@ const VocabularyNameForm = ({
               )}
             </Field>
             <View style={styles.vocActionsContainer}>
-              <Button title="Save" onPress={saveHandler} />
-              <Button title="Cancel" onPress={onCancel} />
+              <Button onPress={saveHandler}>Save</Button>
+              <Button onPress={onCancel}>Cancel</Button>
             </View>
           </>
         );

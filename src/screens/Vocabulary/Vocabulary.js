@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Button, Alert} from 'react-native';
+import {SafeAreaView, View, Alert} from 'react-native';
 import RNFS from 'react-native-fs';
+import Button from '../../components/Button';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
@@ -98,7 +99,9 @@ const Vocabulary = ({
         onDownload={onDownload}
       />
       <WordsList items={words} onWordPress={onWordPress} />
-      <Button title="Add word" onPress={openWordModal} />
+      <View style={styles.bottomBtnContainer}>
+        <Button onPress={openWordModal}>Add word</Button>
+      </View>
       <WordModal
         visible={wordModalVisible}
         word={selectedWord}

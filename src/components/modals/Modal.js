@@ -4,9 +4,9 @@ import {
   View,
   ScrollView,
   SafeAreaView,
-  Button,
   StyleSheet,
 } from 'react-native';
+import Button from '../Button';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -52,8 +52,8 @@ const Modal = ({
             {children}
           </ScrollView>
           <View style={styles.btnContainer}>
-            {onCancel && <Button title={cancelText} onPress={onCancel} />}
-            {onOk && <Button title={okText} onPress={onOk} />}
+            {onCancel && <Button onPress={onCancel}>{cancelText}</Button>}
+            {onOk && <Button onPress={onOk}>{okText}</Button>}
           </View>
         </View>
       </SafeAreaView>

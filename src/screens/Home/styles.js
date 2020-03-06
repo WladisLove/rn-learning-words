@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   bottomBtnContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    paddingVertical: 5,
   },
 });
 

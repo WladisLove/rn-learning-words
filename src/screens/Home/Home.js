@@ -1,8 +1,9 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, View, Text, Button} from 'react-native';
+import {SafeAreaView, ScrollView, View, Text} from 'react-native';
 import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
 import VocabularyModal from '../../components/modals/VocabularyModal';
+import Button from '../../components/Button';
 import {routes} from '../index';
 import {loadVocabulary} from '../../helpers';
 import useModal from '../../helpers/useModal';
@@ -41,8 +42,8 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
         </View>
       </ScrollView>
       <View style={styles.bottomBtnContainer}>
-        <Button title="Upload vocabulary" onPress={onLoadVocabulary} />
-        <Button title="Add vocabulary" onPress={showModal} />
+        <Button onPress={onLoadVocabulary}>Upload vocabulary</Button>
+        <Button onPress={showModal}>Add vocabulary</Button>
       </View>
       <VocabularyModal
         visible={modalVisible}

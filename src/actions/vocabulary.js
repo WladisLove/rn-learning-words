@@ -11,6 +11,13 @@ export const deleteVocabulary = id => ({
   id,
 });
 
+export const changeVocabularyName = (id, newId, name) => ({
+  type: aTypes.CHANGE_NAME_VOCABULARY,
+  id,
+  newId,
+  name,
+});
+
 export const setWord = (item, vocabularyId) => ({
   type: aTypes.SET_WORD,
   vocabularyId,

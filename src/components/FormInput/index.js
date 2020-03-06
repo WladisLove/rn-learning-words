@@ -36,14 +36,18 @@ const styles = StyleSheet.create({
 const FormInput = ({
   input,
   meta,
+  submitError = '',
   placeholder,
   multiline = false,
   numberOfLines,
   label,
+  style = {},
+  inputStyle = {},
+  tooltipStyle = {},
 }) => {
-  const isError = meta.error && meta.touched;
+  const isError = (meta.error && meta.touched) || Boolean(submitError);
   return (
-    <View style={styles.fieldContainer}>
+    <View style={[styles.fieldContainer, style]}>
       {/* TODO: KEYBORD MUST NOT OVERFLOW INPUT */}
       {label && <Text>{label}</Text>}
       <TextInput
@@ -59,10 +63,15 @@ const FormInput = ({
             (numberOfLines
               ? {height: LINE_H * 1.2 * numberOfLines}
               : styles.defaultMultipletextInput),
+          inputStyle,
           isError && styles.errorInput,
         ]}
       />
-      {isError && <Text style={styles.tooltip}>{meta.error}</Text>}
+      {isError && (
+        <Text style={[styles.tooltip, tooltipStyle]}>
+          {meta.error || submitError}
+        </Text>
+      )}
     </View>
   );
 };

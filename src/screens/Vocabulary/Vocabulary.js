@@ -13,6 +13,7 @@ const Vocabulary = ({
   vocabularyId,
   navigation,
   deleteVocabulary,
+  changeVocabularyName,
   setWord,
   deleteWord,
 }) => {
@@ -30,6 +31,11 @@ const Vocabulary = ({
       {text: 'Cancel', style: 'cancel'},
       {text: 'Delete', onPress: deleteHandler},
     ]);
+
+  const onChangeName = (name, newId) => {
+    changeVocabularyName(vocabularyId, newId, name);
+    navigation.setParams({vocabularyId: newId});
+  };
 
   const onSetWord = word => {
     setWord(word, vocabularyId);
@@ -87,8 +93,7 @@ const Vocabulary = ({
       <VocabularyScreenHeader
         vocabulary={vocabulary}
         onBack={goBack}
-        onAdd={openWordModal}
-        onEdit={() => {}}
+        onEdit={onChangeName}
         onDelete={onDelete}
         onDownload={onDownload}
       />

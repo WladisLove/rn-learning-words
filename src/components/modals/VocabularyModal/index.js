@@ -5,7 +5,7 @@ import Modal from '../Modal';
 import FormInput from '../../FormInput';
 
 import {FORM_ERROR} from 'final-form';
-import {generateVocabularyID} from '../../../helpers';
+import {generateVocabularyID, isVocIdUnique} from '../../../helpers';
 import {red} from '../../../color';
 
 const styles = StyleSheet.create({
@@ -24,8 +24,7 @@ const VocabularyModal = ({visible, items, onSave, onClose}) => {
   const onSubmit = values => {
     const name = values.name.trim();
     const id = generateVocabularyID(name);
-    let isUnique = !Object.keys(items).some(itemId => itemId === id);
-    if (!isUnique) {
+    if (!isVocIdUnique(id, Object.keys(items))) {
       return {[FORM_ERROR]: "Name isn't unique"};
     }
     onSave({name, id});

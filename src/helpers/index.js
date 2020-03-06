@@ -34,6 +34,8 @@ const processWordsStructure = ({words}) => {
   return newWords;
 };
 
+export const isVocIdUnique = (id, idsArray = []) => !idsArray.includes(id);
+
 const processVocabularyNameAndID = ({name: vocName}, vocIDs) => {
   const name = vocName;
   const id = generateVocabularyID(vocName);
@@ -44,7 +46,7 @@ const processVocabularyNameAndID = ({name: vocName}, vocIDs) => {
   }, []);
 
   if (similarIDs.length) {
-    if (!similarIDs.includes(id)) {
+    if (isVocIdUnique(id, similarIDs)) {
       return {name, id};
     }
 
@@ -52,7 +54,7 @@ const processVocabularyNameAndID = ({name: vocName}, vocIDs) => {
     while (true) {
       let newName = `${vocName} (${i})`;
       let newId = generateVocabularyID(newName);
-      if (!similarIDs.includes(newId)) {
+      if (isVocIdUnique(newId, similarIDs)) {
         return {name: newName, id: newId};
       }
       i++;

@@ -6,7 +6,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case aTypes.SET_VOCABULARY:
+    case aTypes.VOCABULARY_SET:
       return {
         ...state,
         vocabularies: {
@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: {...state.vocabularies[action.id], ...action.item},
         },
       };
-    case aTypes.CHANGE_NAME_VOCABULARY: {
+    case aTypes.VOCABULARY_CHANGE_NAME: {
       const newVocabularies = {
         ...state.vocabularies,
         [action.newId]: {...state.vocabularies[action.id], name: action.name},
@@ -26,14 +26,12 @@ export default function reducer(state = initialState, action = {}) {
         vocabularies: newVocabularies,
       };
     }
-    case aTypes.DELETE_VOCABULARY:
+    case aTypes.VOCABULARY_DELETE: {
       const newVocabularies = {...state.vocabularies};
       delete newVocabularies[action.id];
-      return {
-        ...state,
-        vocabularies: {...newVocabularies},
-      };
-    case aTypes.SET_WORD:
+      return {...state, vocabularies: {...newVocabularies}};
+    }
+    case aTypes.WORD_SET:
       return {
         ...state,
         vocabularies: {
@@ -47,19 +45,18 @@ export default function reducer(state = initialState, action = {}) {
           },
         },
       };
-    case aTypes.DELETE_WORD:
-      const newWords = {...state.vocabularies[action.vocabularyId].words};
-      delete newWords[action.id];
+    case aTypes.WORD_DELETE: {
+      const {vocabularyId: vocId, id} = action;
+      const newWords = {...state.vocabularies[vocId].words};
+      delete newWords[id];
       return {
         ...state,
         vocabularies: {
           ...state.vocabularies,
-          [action.vocabularyId]: {
-            ...state.vocabularies[action.vocabularyId],
-            words: {...newWords},
-          },
+          [vocId]: {...state.vocabularies[vocId], words: newWords},
         },
       };
+    }
     default:
       return state;
   }

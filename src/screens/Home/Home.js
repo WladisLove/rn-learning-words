@@ -29,7 +29,7 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
   return (
     <SafeAreaView style={styles.root}>
       {/*<StatusBar />*/}
-      <ScrollView bounces={false}>
+      <ScrollView bounces={false} style={styles.scrollView}>
         <AppMotto />
         <View style={styles.body}>
           <Text style={styles.headerText}>Your Vocabularies:</Text>
@@ -40,8 +40,10 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
           />
         </View>
       </ScrollView>
-      <Button title="Add vocabulary" onPress={showModal} />
-      <Button title="Upload vocabulary" onPress={onLoadVocabulary} />
+      <View style={styles.bottomBtnContainer}>
+        <Button title="Upload vocabulary" onPress={onLoadVocabulary} />
+        <Button title="Add vocabulary" onPress={showModal} />
+      </View>
       <VocabularyModal
         visible={modalVisible}
         onSave={onSaveVocabulary}

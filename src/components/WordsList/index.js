@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
     minHeight: 70,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 10,
+    paddingVertical: 9,
+    marginVertical: 1,
     paddingHorizontal: 20,
+    overflow: 'hidden',
   },
   separator: {
     backgroundColor: black,
@@ -40,9 +42,19 @@ const WordsList = ({items = {}, onWordPress = () => {}}) => {
         <TouchableOpacity
           style={styles.listItem}
           onPress={onWordPress.bind(null, item.id)}>
-          <Text style={[styles.text, styles.word]}>{item.word}</Text>
+          <Text
+            style={[styles.text, styles.word]}
+            numberOfLines={3}
+            ellipsizeMode="tail">
+            {item.word}
+          </Text>
           <Text style={styles.dot}>•</Text>
-          <Text style={[styles.text, styles.meaning]}>{item.meaning}</Text>
+          <Text
+            style={[styles.text, styles.meaning]}
+            numberOfLines={3}
+            ellipsizeMode="tail">
+            {item.meaning}
+          </Text>
         </TouchableOpacity>
       )}
       ItemSeparatorComponent={() => <View style={styles.separator} />}

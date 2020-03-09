@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const actionsContainerStyle = {flexDirection: 'row'};
+const actionsContainerStyle = {flexDirection: 'row', alignItems: 'center'};
 
 export const headerStyles = StyleSheet.create({
   headerContainer: {

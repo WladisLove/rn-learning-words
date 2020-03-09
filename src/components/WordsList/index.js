@@ -32,12 +32,22 @@ const styles = StyleSheet.create({
   meaning: {flex: 0.44, textAlign: 'right'},
 });
 
-const WordsList = ({items = {}, onWordPress = () => {}}) => {
+const WordsList = ({items = {}, searchQuery, onWordPress = () => {}}) => {
+  let q;
+  const data = searchQuery
+    ? ((q = searchQuery.toLowerCase()),
+      Object.values(items).filter(
+        item =>
+          item.word.toLowerCase().indexOf(q) !== -1 ||
+          item.meaning.toLowerCase().indexOf(q) !== -1,
+      ))
+    : Object.values(items);
+
   return (
     <FlatList
       bounces={false}
       style={styles.body}
-      data={Object.values(items)}
+      data={data}
       renderItem={({item}) => (
         <TouchableOpacity
           style={styles.listItem}

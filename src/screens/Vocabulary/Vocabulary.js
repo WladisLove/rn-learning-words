@@ -21,6 +21,7 @@ const Vocabulary = ({
   const {words = {}} = vocabulary;
   const [wordModalVisible, openWordModal, closeWordModal] = useModal(false);
   const [selectedWordID, selectWordID] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(null);
 
   const goBack = () => navigation.goBack();
   const deleteHandler = () => {
@@ -97,8 +98,14 @@ const Vocabulary = ({
         onEdit={onChangeName}
         onDelete={onDelete}
         onDownload={onDownload}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
-      <WordsList items={words} onWordPress={onWordPress} />
+      <WordsList
+        items={words}
+        onWordPress={onWordPress}
+        searchQuery={searchQuery}
+      />
       <View style={styles.bottomBtnContainer}>
         <Button onPress={openWordModal}>Add word</Button>
       </View>

@@ -1,11 +1,21 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import VocabularyNameForm from './VocabularyNameForm';
-import Button from '../Button';
+import ButtonIcon from '../ButtonIcon';
 import SearchInput from '../SearchInput';
 import arrowRight from '../../assets/arrow-right.png';
+import editIcon from '../../assets/edit.png';
+import deleteIcon from '../../assets/delete.png';
+import runIcon from '../../assets/run.png';
+import findIcon from '../../assets/find.png';
+import downloadIcon from '../../assets/download.png';
 
 import {headerStyles as styles} from './styles';
+
+const iconBtnStyle = {
+  style: styles.btn,
+  iconStyle: styles.btnIcon,
+};
 
 const VocabularyScreenHeader = ({
   vocabulary = {},
@@ -45,11 +55,31 @@ const VocabularyScreenHeader = ({
             <View style={styles.vocActionsContainer}>
               {searchQuery === null ? (
                 <>
-                  <Button onPress={turnEditableOn}>Edit</Button>
-                  <Button onPress={onDelete}>Delete</Button>
-                  <Button onPress={() => {}}>Run</Button>
-                  <Button onPress={turnFindModeOn}>Find</Button>
-                  <Button onPress={onDownload}>Download</Button>
+                  <ButtonIcon
+                    src={editIcon}
+                    onPress={turnEditableOn}
+                    {...iconBtnStyle}
+                  />
+                  <ButtonIcon
+                    src={runIcon}
+                    onPress={() => {}}
+                    {...iconBtnStyle}
+                  />
+                  <ButtonIcon
+                    src={findIcon}
+                    onPress={turnFindModeOn}
+                    {...iconBtnStyle}
+                  />
+                  <ButtonIcon
+                    src={downloadIcon}
+                    onPress={onDownload}
+                    {...iconBtnStyle}
+                  />
+                  <ButtonIcon
+                    src={deleteIcon}
+                    onPress={onDelete}
+                    {...iconBtnStyle}
+                  />
                 </>
               ) : (
                 <SearchInput

@@ -1,6 +1,11 @@
 import {StyleSheet} from 'react-native';
 
-const actionsContainerStyle = {flexDirection: 'row', alignItems: 'center'};
+const actionsContainerStyle = {
+  flexDirection: 'row',
+  alignItems: 'center',
+  height: 40,
+  marginTop: 5,
+};
 
 export const headerStyles = StyleSheet.create({
   headerContainer: {
@@ -34,6 +39,8 @@ export const headerStyles = StyleSheet.create({
     maxHeight: 52,
   },
   vocActionsContainer: actionsContainerStyle,
+  btn: {marginLeft: 0, marginRight: 15},
+  btnIcon: {width: 23, height: 23},
 });
 
 export const formStyles = StyleSheet.create({

@@ -23,6 +23,7 @@ const VocabularyScreenHeader = ({
   onEdit,
   onDelete,
   onDownload,
+  onRun,
   searchQuery,
   setSearchQuery,
 }) => {
@@ -60,11 +61,7 @@ const VocabularyScreenHeader = ({
                     onPress={turnEditableOn}
                     {...iconBtnStyle}
                   />
-                  <ButtonIcon
-                    src={runIcon}
-                    onPress={() => {}}
-                    {...iconBtnStyle}
-                  />
+                  <ButtonIcon src={runIcon} onPress={onRun} {...iconBtnStyle} />
                   <ButtonIcon
                     src={findIcon}
                     onPress={turnFindModeOn}

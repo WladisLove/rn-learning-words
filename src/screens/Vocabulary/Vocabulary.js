@@ -6,6 +6,7 @@ import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
 import useModal from '../../helpers/useModal';
+import {routes} from '../index';
 
 import styles from './styles';
 
@@ -81,6 +82,8 @@ const Vocabulary = ({
     // });
   };
 
+  const onRun = () => navigation.push(routes.LEARN_VOCABULARY, {vocabularyId});
+
   const onWordPress = wordID => {
     selectWordID(wordID);
     openWordModal();
@@ -98,6 +101,7 @@ const Vocabulary = ({
         onEdit={onChangeName}
         onDelete={onDelete}
         onDownload={onDownload}
+        onRun={onRun}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />

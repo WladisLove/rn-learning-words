@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {silver, navy_dark} from '../../color';
 
 const {width: screenW} = Dimensions.get('window');
 
@@ -13,9 +14,8 @@ const navBtnIcon = {
   opacity: 0.5,
 };
 
-const styles = StyleSheet.create({
+export const sliderStyles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: 'pink',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -29,7 +29,25 @@ const styles = StyleSheet.create({
   navBtnIcon,
   navBtnIconLeft: {...navBtnIcon, transform: [{rotate: '180deg'}]},
   listWrapper: {width: scrollableAreaWidth},
-  wordCard: {padding: 20, width: itemWidth},
 });
 
-export default styles;
+export const wordCardStyles = StyleSheet.create({
+  wordCardWrapper: {
+    paddingHorizontal: 20,
+    width: itemWidth,
+  },
+  wordCard: {
+    minHeight: 200,
+    padding: 20,
+    backgroundColor: silver,
+    borderRadius: 5,
+    justifyContent: 'center',
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 20,
+    color: navy_dark,
+    fontWeight: '700',
+  },
+  divider: {fontSize: 16, marginVertical: 10},
+});

@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, Animated, FlatList, PanResponder} from 'react-native';
+import React from 'react';
+import {View, Animated, FlatList, PanResponder} from 'react-native';
 import ButtonIcon from '../ButtonIcon';
+import WordCard from './WordCard';
 import arrowRight from '../../assets/arrow-right.png';
-import styles, {itemWidth, scrollableAreaWidth} from './styles';
+import {sliderStyles as styles, itemWidth, scrollableAreaWidth} from './styles';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -12,8 +13,8 @@ const WordSlider = ({
   onIndexChange = () => {},
   onEndReached,
   onEndReachedThreshold,
+  ...props
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(index || 0);
   let listRef;
 
   const getRef = ref => ref && (listRef = ref._component || ref);
@@ -28,17 +29,16 @@ const WordSlider = ({
     const newIndex = Number.isInteger(directIndex)
       ? directIndex
       : toNext
-      ? Math.min(currentIndex + 1, data.length - 1)
-      : Math.max(currentIndex - 1, 0);
+      ? Math.min(index + 1, data.length - 1)
+      : Math.max(index - 1, 0);
 
     listRef.scrollToIndex({index: newIndex, animated: true});
-    currentIndex !== newIndex &&
-      (setCurrentIndex(newIndex), onIndexChange(newIndex));
+    index !== newIndex && onIndexChange(newIndex);
   };
 
   // PanResponder handlers
   const handlePanResponderMove = (e, {dx}) => {
-    const curOffset = currentIndex * itemWidth;
+    const curOffset = index * itemWidth;
     const calcOffset = curOffset - dx;
     listRef.scrollToOffset({offset: calcOffset, animated: false});
   };
@@ -49,7 +49,7 @@ const WordSlider = ({
     // if not return to current index
     Math.abs(dx) > scrollableAreaWidth / 3
       ? setIndex(!(dx > 0))
-      : setIndex(null, currentIndex);
+      : setIndex(null, index);
   };
 
   const panResponderRef = PanResponder.create({
@@ -74,20 +74,14 @@ const WordSlider = ({
           horizontal
           data={data}
           getItemLayout={getItemLayout}
-          initialScrollIndex={currentIndex}
+          initialScrollIndex={index}
           ref={getRef}
           scrollEnabled={false}
           showsHorizontalScrollIndicator={false}
           onEndReached={onEndReached}
           onEndReachedThreshold={onEndReachedThreshold}
           keyExtractor={item => item.id}
-          renderItem={({item}) => {
-            return (
-              <View style={[styles.wordCard, {backgroundColor: item.color}]}>
-                <Text>{item.content}</Text>
-              </View>
-            );
-          }}
+          renderItem={({item}) => <WordCard item={item} {...props} />}
         />
       </View>
       <ButtonIcon

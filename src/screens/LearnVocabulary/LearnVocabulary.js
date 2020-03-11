@@ -13,7 +13,7 @@ const emptyCard = (
   </View>
 );
 
-const LearnVocabulary = ({data, ...props}) => {
+const LearnVocabulary = ({data, navigation, ...props}) => {
   const [mode, setMode] = useState(showModes[0]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isShown, setIsShown] = useState(false);
@@ -23,6 +23,8 @@ const LearnVocabulary = ({data, ...props}) => {
 
   const word = data[currentIndex];
 
+  const goBack = () => navigation.goBack();
+
   const handleChangeIndex = i => {
     setIsShown(false);
     setCurrentIndex(i);
@@ -30,6 +32,9 @@ const LearnVocabulary = ({data, ...props}) => {
 
   return (
     <SafeAreaView style={styles.root}>
+      <View style={styles.backBtnWrapper}>
+        <Button onPress={goBack}>Back</Button>
+      </View>
       <Picker
         text="Show:"
         value={mode}

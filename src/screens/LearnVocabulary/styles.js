@@ -3,6 +3,11 @@ import {green_light, silver} from '../../color';
 
 const styles = StyleSheet.create({
   root: {backgroundColor: green_light, flex: 1},
+  backBtnWrapper: {
+    marginLeft: 10,
+    marginTop: 10,
+    alignItems: 'flex-start',
+  },
   showRestMargings: {marginVertical: 15},
   cardsWrapper: {paddingHorizontal: 40},
   title: {fontSize: 16, marginBottom: 5},

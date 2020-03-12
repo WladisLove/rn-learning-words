@@ -5,32 +5,30 @@ import WordInfoArea from './WordInfoArea';
 
 const VocabularyModal = props => {
   const {visible, word, onSave, onClose, onUpdate, onDelete} = props;
-  const [editable, setEditable] = useState(!word);
+  const withWord = Boolean(word);
+  const [editable, setEditable] = useState(!withWord);
   const onStartEdit = () => setEditable(true);
 
-  useEffect(() => setEditable(!word), [visible]);
+  useEffect(() => setEditable(!withWord), [visible]);
 
   const updateHandler = w => {
     onUpdate(w);
     setEditable(false);
   };
 
-  const onApplyChanges = word ? updateHandler : onSave;
-  const onCancelChanges = word ? () => setEditable(false) : onClose;
+  const onApplyChanges = withWord ? updateHandler : onSave;
+  const onCancelChanges = withWord ? () => setEditable(false) : onClose;
 
   const modalBtnConfig = editable
     ? {
-        okText: 'Submit',
+        okText: withWord ? 'Save' : 'Add',
         onOk: () => submitExternal(), // important to use in such way
-        onCancel: onCancelChanges,
+        onCancel: withWord ? onCancelChanges : undefined,
       }
-    : {
-        cancelText: 'Close',
-        onCancel: onClose,
-      };
+    : {};
 
   return (
-    <Modal visible={visible} {...modalBtnConfig}>
+    <Modal visible={visible} onClose={onClose} {...modalBtnConfig}>
       {editable ? (
         <WordForm word={word} onSave={onApplyChanges} />
       ) : (

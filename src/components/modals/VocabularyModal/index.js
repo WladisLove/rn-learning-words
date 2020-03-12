@@ -36,8 +36,8 @@ const VocabularyModal = ({visible, items, onSave, onClose}) => {
   return (
     <Modal
       visible={visible}
-      okText="Submit"
-      onCancel={onClose}
+      okText="Add"
+      onClose={onClose}
       onOk={submitExternalHandler}>
       <Form
         onSubmit={onSubmit}

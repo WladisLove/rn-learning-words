@@ -7,6 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import Button from '../Button';
+import ButtonIcon from '../ButtonIcon';
+import close from '../../assets/close.png';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -16,17 +18,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   mainContainer: {
+    position: 'relative',
     backgroundColor: 'white',
     width: '85%',
     maxWidth: 350,
     marginVertical: 40,
-    paddingVertical: 20,
+    paddingHorizontal: 10,
+    paddingTop: 50,
+    paddingBottom: 20,
   },
   scrollViewContent: {paddingHorizontal: 10},
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  closeBtn: {padding: 5, position: 'absolute', top: 7, right: 7},
+  closeIcon: {width: 17, height: 17},
 });
 
 const Modal = ({
@@ -36,6 +43,7 @@ const Modal = ({
   cancelText = 'Cancel',
   onCancel,
   onOk,
+  onClose,
   children,
 }) => {
   return (
@@ -43,9 +51,15 @@ const Modal = ({
       animationType={animationType}
       transparent
       visible={visible}
-      onRequestClose={onCancel}>
+      onRequestClose={onClose}>
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.mainContainer}>
+          <ButtonIcon
+            src={close}
+            onPress={onClose}
+            iconStyle={styles.closeIcon}
+            style={styles.closeBtn}
+          />
           <ScrollView
             bounces={false}
             contentContainerStyle={styles.scrollViewContent}>

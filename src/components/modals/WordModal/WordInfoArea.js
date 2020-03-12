@@ -2,23 +2,25 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Button from '../../Button';
 import {wordFields} from './WordForm';
-import {navy_dark} from '../../../color';
+import {navy_dark, green_light} from '../../../color';
 
 const styles = StyleSheet.create({
   mainField: {
     textAlign: 'center',
-    fontSize: 21,
-    fontWeight: '500',
+    fontSize: 20,
+    fontWeight: '700',
     color: navy_dark,
   },
-  mainSeparator: {
-    fontSize: 32,
+  separatorWrapper: {alignItems: 'center', paddingVertical: 9},
+  separator: {
+    backgroundColor: green_light,
+    height: 3,
+    width: 45,
     textAlign: 'center',
-    marginVertical: 5,
   },
   fstSection: {marginTop: 15},
   section: {marginBottom: 12},
-  sectionTitle: {fontSize: 14, marginBottom: 5, paddingLeft: 5},
+  sectionTitle: {fontSize: 14, marginBottom: 5, paddingLeft: 10},
   sectionText: {fontSize: 18},
   btnContainer: {flexDirection: 'row', justifyContent: 'flex-end'},
 });
@@ -29,7 +31,9 @@ const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
   return (
     <View>
       <Text style={styles.mainField}>{word.word}</Text>
-      <Text style={styles.mainSeparator}>-•-</Text>
+      <View style={styles.separatorWrapper}>
+        <View style={styles.separator} />
+      </View>
       <Text style={styles.mainField}>{word.meaning}</Text>
       {restFields.map((name, i) => {
         return word[name] ? (

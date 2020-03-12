@@ -1,5 +1,8 @@
+import {Platform} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
+
+export const isIOS = Platform.OS === 'ios';
 
 export const generateVocabularyID = name =>
   name.toLowerCase().replace(/ /gi, '-');

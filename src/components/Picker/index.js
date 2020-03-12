@@ -5,12 +5,10 @@ import {
   Text,
   TouchableOpacity,
   Picker as RNPicker,
-  Platform,
 } from 'react-native';
 import Button from '../Button';
+import {isIOS} from '../../helpers';
 import styles from './styles';
-
-const isIOS = Platform.OS === 'ios';
 
 // TODO: add ScrollArea for android picker modal
 // TODO: add max-height for android picker modal content

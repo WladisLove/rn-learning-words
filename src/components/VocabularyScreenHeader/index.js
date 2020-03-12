@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import VocabularyNameForm from './VocabularyNameForm';
 import ButtonIcon from '../ButtonIcon';
 import SearchInput from '../SearchInput';
+import {isIOS} from '../../helpers';
 import arrowRight from '../../assets/arrow-right.png';
 import editIcon from '../../assets/edit.png';
 import deleteIcon from '../../assets/delete.png';
@@ -67,11 +68,13 @@ const VocabularyScreenHeader = ({
                     onPress={turnFindModeOn}
                     {...iconBtnStyle}
                   />
-                  <ButtonIcon
-                    src={downloadIcon}
-                    onPress={onDownload}
-                    {...iconBtnStyle}
-                  />
+                  {!isIOS && (
+                    <ButtonIcon
+                      src={downloadIcon}
+                      onPress={onDownload}
+                      {...iconBtnStyle}
+                    />
+                  )}
                   <ButtonIcon
                     src={deleteIcon}
                     onPress={onDelete}

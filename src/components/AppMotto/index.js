@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, Platform} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import {isIOS} from '../../helpers';
 import {green_light, navy_dark} from '../../color';
-
-const isIOS = Platform.OS === 'ios';
 
 const styles = StyleSheet.create({
   root: {

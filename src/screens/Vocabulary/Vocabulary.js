@@ -89,7 +89,7 @@ const Vocabulary = ({
     openWordModal();
   };
 
-  console.log('vocabulary', vocabulary);
+  //console.log('vocabulary', vocabulary);
 
   const selectedWord = selectedWordID ? words[selectedWordID] : null;
 

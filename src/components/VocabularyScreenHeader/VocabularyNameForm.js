@@ -63,7 +63,7 @@ const VocabularyNameForm = ({
   );
 };
 
-const mapStateToProps = ({vocabularies}) => {
+const mapStateToProps = ({vocStore: {vocabularies}}) => {
   const vocabulariesNames = Object.keys(vocabularies);
   return {names: vocabulariesNames};
 };

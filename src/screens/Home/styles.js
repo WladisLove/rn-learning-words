@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {green_light, silver} from '../../color';
+import {green_light, silver, black} from '../../color';
 
 const styles = StyleSheet.create({
   root: {flex: 1, backgroundColor: green_light},
@@ -10,15 +10,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   headerText: {
-    color: 'blue',
+    color: black,
     fontSize: 20,
     fontWeight: '700',
-    padding: 4,
+    paddingHorizontal: 7,
+    textAlign: 'right',
   },
   splitLine: {
-    backgroundColor: 'black',
+    backgroundColor: green_light,
     width: '100%',
-    height: 1,
+    height: 3,
     marginVertical: 7,
   },
   bottomBtnContainer: {

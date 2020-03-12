@@ -33,7 +33,7 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
       <ScrollView bounces={false} style={styles.scrollView}>
         <AppMotto />
         <View style={styles.body}>
-          <Text style={styles.headerText}>Your Vocabularies:</Text>
+          <Text style={styles.headerText}>Your Vocabularies</Text>
           <View style={styles.splitLine} />
           <VocabularyList
             vocabularies={vocabularies}

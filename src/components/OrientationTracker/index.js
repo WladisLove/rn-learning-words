@@ -1,32 +1,32 @@
 import React from 'react';
 import {View, Dimensions} from 'react-native';
 import {connect} from 'react-redux';
-import {setIsPortraitOrientation} from '../../actions/orientation';
+import {setIsLandscapeOrientation} from '../../actions/orientation';
 
-const OrientationTracker = ({isPortrait, setIsPortrait}) => {
-  const setPortrait = () => {
+const OrientationTracker = ({isLandscape, setIsLandscape}) => {
+  const setLandscape = () => {
     const {width, height} = Dimensions.get('window');
-    const _isPortrait = height > width;
-    isPortrait !== _isPortrait && setIsPortrait(_isPortrait);
+    const _isLandscape = width > height;
+    isLandscape !== _isLandscape && setIsLandscape(_isLandscape);
   };
 
-  if (isPortrait === undefined) {
-    setPortrait();
+  if (isLandscape === undefined) {
+    setLandscape();
   }
 
   const onLayout = () => {
-    setPortrait();
+    setLandscape();
   };
 
   return <View onLayout={onLayout} />;
 };
 
 const mapStateToProps = ({orientStore}) => ({
-  isPortrait: orientStore.isPortrait,
+  isLandscape: orientStore.isLandscape,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setIsPortrait: fl => dispatch(setIsPortraitOrientation(fl)),
+  setIsLandscape: fl => dispatch(setIsLandscapeOrientation(fl)),
 });
 
 export default connect(

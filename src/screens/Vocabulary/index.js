@@ -7,7 +7,10 @@ import {
   deleteWord,
 } from '../../actions/vocabulary';
 
-const mapStateToProps = ({vocabularies}, {route: {params = {}}}) => {
+const mapStateToProps = (
+  {vocStore: {vocabularies}},
+  {route: {params = {}}},
+) => {
   const {vocabularyId} = params;
   return {
     vocabulary: vocabularies[vocabularyId],

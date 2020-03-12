@@ -4,6 +4,7 @@ import {View} from 'react-native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import StackNavigator from './components/StackNavigator';
+import OrientationTracker from './components/OrientationTracker';
 import {persistor, store} from './store';
 import {routes, screens} from './screens';
 
@@ -12,6 +13,7 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={<View />} persistor={persistor}>
         <StackNavigator screens={screens} initialRouteName={routes.HOME} />
+        <OrientationTracker />
       </PersistGate>
     </Provider>
   );

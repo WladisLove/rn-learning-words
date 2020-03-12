@@ -2,8 +2,12 @@ import {connect} from 'react-redux';
 import Home from './Home';
 import {setVocabulary} from '../../actions/vocabulary';
 
-const mapStateToProps = ({vocStore: {vocabularies}}) => ({
+const mapStateToProps = ({
+  vocStore: {vocabularies},
+  orientStore: {isLandscape},
+}) => ({
   vocabularies,
+  isLandscape,
 });
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

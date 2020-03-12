@@ -8,13 +8,14 @@ import {
 } from '../../actions/vocabulary';
 
 const mapStateToProps = (
-  {vocStore: {vocabularies}},
+  {vocStore: {vocabularies}, orientStore: {isLandscape}},
   {route: {params = {}}},
 ) => {
   const {vocabularyId} = params;
   return {
     vocabulary: vocabularies[vocabularyId],
     vocabularyId,
+    isLandscape,
   };
 };
 

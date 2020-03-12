@@ -13,6 +13,7 @@ import styles from './styles';
 const Vocabulary = ({
   vocabulary = {},
   vocabularyId,
+  isLandscape,
   navigation,
   deleteVocabulary,
   changeVocabularyName,
@@ -104,15 +105,19 @@ const Vocabulary = ({
         onRun={onRun}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        isLandscape={isLandscape}
+        onAdd={openWordModal}
       />
       <WordsList
         items={words}
         onWordPress={onWordPress}
         searchQuery={searchQuery}
       />
-      <View style={styles.bottomBtnContainer}>
-        <Button onPress={openWordModal}>Add word</Button>
-      </View>
+      {!isLandscape && (
+        <View style={styles.bottomBtnContainer}>
+          <Button onPress={openWordModal}>Add word</Button>
+        </View>
+      )}
       <WordModal
         visible={wordModalVisible}
         word={selectedWord}
@@ -120,6 +125,7 @@ const Vocabulary = ({
         onClose={onCloseWord}
         onUpdate={onUpdateWord}
         onDelete={onDeleteWord}
+        isLandscape={isLandscape}
       />
     </SafeAreaView>
   );

@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
   root: {flex: 1, backgroundColor: green_light},
   body: {flex: 1, backgroundColor: silver},
   bottomBtnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 5,
   },
 });

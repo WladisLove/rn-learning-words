@@ -51,7 +51,9 @@ const VocabularyNameForm = ({
               )}
             </Field>
             <View style={styles.vocActionsContainer}>
-              <Button onPress={saveHandler}>Save</Button>
+              <Button style={{marginRight: 20}} onPress={saveHandler}>
+                Save
+              </Button>
               <Button onPress={onCancel}>Cancel</Button>
             </View>
           </>

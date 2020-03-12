@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Button from '../../Button';
-import {wordFields} from './WordForm';
+import {secondaryFields} from './WordForm';
 import {navy_dark, green_light} from '../../../color';
 
 const styles = StyleSheet.create({
@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
   btnContainer: {flexDirection: 'row', justifyContent: 'flex-end'},
 });
 
-const [, , ...restFields] = wordFields; // skip 'word' and 'meaning' fields
-
 const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
   return (
     <View>
@@ -35,7 +33,7 @@ const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
         <View style={styles.separator} />
       </View>
       <Text style={styles.mainField}>{word.meaning}</Text>
-      {restFields.map((name, i) => {
+      {secondaryFields.map((name, i) => {
         return word[name] ? (
           <View
             key={name}

@@ -1,16 +1,13 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text, View} from 'react-native';
 import {Form, Field} from 'react-final-form';
 import FormInput from '../../FormInput';
 
 import {generateWordID} from '../../../helpers';
-import {red} from '../../../color';
+import {formStyles as styles} from './styles';
 
-const styles = StyleSheet.create({
-  errorTip: {color: red, fontSize: 16},
-});
-
-export const wordFields = ['word', 'meaning', 'synonyms', 'context'];
+const mainFields = ['word', 'meaning'];
+export const secondaryFields = ['synonyms', 'context'];
 const fieldsConfig = {
   word: {
     placeholder: 'Word',
@@ -42,7 +39,7 @@ const fieldsConfig = {
 
 export let submitExternal = () => {};
 
-const WordForm = ({word, onSave}) => {
+const WordForm = ({word, onSave, isLandscape}) => {
   const witWord = Boolean(word);
 
   const onValidate = values => ({
@@ -53,6 +50,13 @@ const WordForm = ({word, onSave}) => {
   const onSubmit = values =>
     onSave({...values, id: witWord ? word.id : generateWordID(values.word)});
 
+  const mainFieldsStyle = isLandscape
+    ? {
+        container: styles.mainFieldsContainerL,
+        field: styles.mainFieldL,
+      }
+    : {};
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -61,7 +65,27 @@ const WordForm = ({word, onSave}) => {
         submitExternal = handleSubmit;
         return (
           <>
-            {wordFields.map(name => {
+            <View style={mainFieldsStyle.container}>
+              {mainFields.map(name => {
+                let conf = fieldsConfig[name];
+                return (
+                  <Field
+                    key={name}
+                    name={name}
+                    placeholder={conf.placeholder}
+                    initialValue={witWord ? word[name] : undefined}>
+                    {fieldProps => (
+                      <FormInput
+                        style={mainFieldsStyle.field}
+                        {...fieldProps}
+                        {...conf.inputProps}
+                      />
+                    )}
+                  </Field>
+                );
+              })}
+            </View>
+            {secondaryFields.map(name => {
               let conf = fieldsConfig[name];
               return (
                 <Field

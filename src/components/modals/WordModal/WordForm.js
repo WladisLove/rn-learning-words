@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
   errorTip: {color: red, fontSize: 16},
 });
 
-export const wordFields = ['word', 'meaning', 'synonyms', 'context'];
+export const mainFields = ['word', 'meaning'];
+export const secondaryFields = ['synonyms', 'context'];
 const fieldsConfig = {
   word: {
     placeholder: 'Word',
@@ -42,7 +43,7 @@ const fieldsConfig = {
 
 export let submitExternal = () => {};
 
-const WordForm = ({word, onSave}) => {
+const WordForm = ({word, onSave, isLandscape}) => {
   const witWord = Boolean(word);
 
   const onValidate = values => ({
@@ -61,7 +62,21 @@ const WordForm = ({word, onSave}) => {
         submitExternal = handleSubmit;
         return (
           <>
-            {wordFields.map(name => {
+            {mainFields.map(name => {
+              let conf = fieldsConfig[name];
+              return (
+                <Field
+                  key={name}
+                  name={name}
+                  placeholder={conf.placeholder}
+                  initialValue={witWord ? word[name] : undefined}>
+                  {fieldProps => (
+                    <FormInput {...fieldProps} {...conf.inputProps} />
+                  )}
+                </Field>
+              );
+            })}
+            {secondaryFields.map(name => {
               let conf = fieldsConfig[name];
               return (
                 <Field

@@ -2,9 +2,18 @@ import React, {useState, useEffect} from 'react';
 import Modal from '../Modal';
 import WordForm, {submitExternal} from './WordForm';
 import WordInfoArea from './WordInfoArea';
+import {modalStyles as styles} from './styles';
 
 const VocabularyModal = props => {
-  const {visible, word, onSave, onClose, onUpdate, onDelete} = props;
+  const {
+    visible,
+    word,
+    onSave,
+    onClose,
+    onUpdate,
+    onDelete,
+    isLandscape,
+  } = props;
   const withWord = Boolean(word);
   const [editable, setEditable] = useState(!withWord);
   const onStartEdit = () => setEditable(true);
@@ -28,11 +37,24 @@ const VocabularyModal = props => {
     : {};
 
   return (
-    <Modal visible={visible} onClose={onClose} {...modalBtnConfig}>
+    <Modal
+      visible={visible}
+      onClose={onClose}
+      contentStyle={isLandscape ? styles.contentL : {}}
+      {...modalBtnConfig}>
       {editable ? (
-        <WordForm word={word} onSave={onApplyChanges} />
+        <WordForm
+          word={word}
+          onSave={onApplyChanges}
+          isLandscape={isLandscape}
+        />
       ) : (
-        <WordInfoArea word={word} onEdit={onStartEdit} onDelete={onDelete} />
+        <WordInfoArea
+          word={word}
+          onEdit={onStartEdit}
+          onDelete={onDelete}
+          isLandscape={isLandscape}
+        />
       )}
     </Modal>
   );

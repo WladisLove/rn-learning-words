@@ -12,6 +12,7 @@ import findIcon from '../../assets/find.png';
 import downloadIcon from '../../assets/download.png';
 
 import {headerStyles as styles} from './styles';
+import Button from '../Button';
 
 const iconBtnStyle = {
   style: styles.btn,
@@ -27,6 +28,8 @@ const VocabularyScreenHeader = ({
   onRun,
   searchQuery,
   setSearchQuery,
+  isLandscape,
+  onAdd,
 }) => {
   const [isEditable, setIsEditable] = useState(false);
   const turnEditableOn = () => setIsEditable(true);
@@ -80,6 +83,11 @@ const VocabularyScreenHeader = ({
                     onPress={onDelete}
                     {...iconBtnStyle}
                   />
+                  {isLandscape && (
+                    <View style={styles.addWordBtnWrapper}>
+                      <Button onPress={onAdd}>Add word</Button>
+                    </View>
+                  )}
                 </>
               ) : (
                 <SearchInput

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
 const [, , ...restFields] = wordFields; // skip 'word' and 'meaning' fields
 
-const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
+const WordInfoArea = ({word = {}, onEdit, onDelete, isLandscape}) => {
   return (
     <View>
       <Text style={styles.mainField}>{word.word}</Text>

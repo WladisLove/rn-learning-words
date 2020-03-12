@@ -45,6 +45,7 @@ const Modal = ({
   onOk,
   onClose,
   children,
+  contentStyle = {},
 }) => {
   return (
     <RNModal
@@ -54,7 +55,7 @@ const Modal = ({
       onRequestClose={onClose}
       supportedOrientations={['portrait', 'landscape']}>
       <SafeAreaView style={styles.wrapper}>
-        <View style={styles.mainContainer}>
+        <View style={[styles.mainContainer, contentStyle]}>
           <ButtonIcon
             src={close}
             onPress={onClose}

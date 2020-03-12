@@ -3,7 +3,7 @@ import Modal from '../Modal';
 import WordForm, {submitExternal} from './WordForm';
 import WordInfoArea from './WordInfoArea';
 
-const VocabularyModal = props => {
+const WordModal = props => {
   const {visible, word, onSave, onClose, onUpdate, onDelete} = props;
   const withWord = Boolean(word);
   const [editable, setEditable] = useState(!withWord);
@@ -38,4 +38,4 @@ const VocabularyModal = props => {
   );
 };
 
-export default VocabularyModal;
+export default WordModal;

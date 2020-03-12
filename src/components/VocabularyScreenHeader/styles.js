@@ -41,6 +41,7 @@ export const headerStyles = StyleSheet.create({
   vocActionsContainer: actionsContainerStyle,
   btn: {marginLeft: 0, marginRight: 15},
   btnIcon: {width: 23, height: 23},
+  addWordBtnWrapper: {flex: 1, alignItems: 'flex-end'},
 });
 
 export const formStyles = StyleSheet.create({

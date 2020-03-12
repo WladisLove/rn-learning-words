@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import VocabularyNameForm from './VocabularyNameForm';
 import ButtonIcon from '../ButtonIcon';
+import Button from '../Button';
 import SearchInput from '../SearchInput';
 import {isIOS} from '../../helpers';
 import arrowRight from '../../assets/arrow-right.png';
@@ -27,6 +28,8 @@ const VocabularyScreenHeader = ({
   onRun,
   searchQuery,
   setSearchQuery,
+  isLandscape,
+  onAdd,
 }) => {
   const [isEditable, setIsEditable] = useState(false);
   const turnEditableOn = () => setIsEditable(true);
@@ -80,6 +83,11 @@ const VocabularyScreenHeader = ({
                     onPress={onDelete}
                     {...iconBtnStyle}
                   />
+                  {isLandscape && (
+                    <View style={styles.addWordBtnWrapper}>
+                      <Button onPress={onAdd}>Add word</Button>
+                    </View>
+                  )}
                 </>
               ) : (
                 <SearchInput

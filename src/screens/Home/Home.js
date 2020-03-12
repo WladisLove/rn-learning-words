@@ -9,14 +9,13 @@ import {loadVocabulary} from '../../helpers';
 import useModal from '../../helpers/useModal';
 import styles from './styles';
 
-const Home = ({vocabularies, setVocabulary, navigation}) => {
+const Home = ({vocabularies, isLandscape, setVocabulary, navigation}) => {
   const [modalVisible, showModal, closeModal] = useModal(false);
 
   const onPressVocabulary = vocabularyId =>
     navigation.navigate(routes.VOCABULARY, {vocabularyId});
 
   const onSaveVocabulary = voc => {
-    console.log('onAddVocabulary', voc);
     setVocabulary(voc);
     closeModal();
   };
@@ -28,7 +27,7 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView style={[styles.root, isLandscape && styles.rootL]}>
       {/*<StatusBar />*/}
       <ScrollView bounces={false} style={styles.scrollView}>
         <AppMotto />
@@ -41,9 +40,17 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
           />
         </View>
       </ScrollView>
-      <View style={styles.bottomBtnContainer}>
-        <Button onPress={onLoadVocabulary}>Upload vocabulary</Button>
-        <Button onPress={showModal}>Add vocabulary</Button>
+      <View
+        style={[
+          styles.bottomBtnContainer,
+          isLandscape && styles.bottomBtnContainerL,
+        ]}>
+        <Button onPress={onLoadVocabulary} textStyle={styles.btnText}>
+          Upload{isLandscape ? '\n' : ' '}vocabulary
+        </Button>
+        <Button onPress={showModal} textStyle={styles.btnText}>
+          Add{isLandscape ? '\n' : ' '}vocabulary
+        </Button>
       </View>
       <VocabularyModal
         visible={modalVisible}

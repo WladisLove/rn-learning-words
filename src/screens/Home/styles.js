@@ -3,6 +3,7 @@ import {green_light, silver, black} from '../../color';
 
 const styles = StyleSheet.create({
   root: {flex: 1, backgroundColor: green_light},
+  rootL: {flexDirection: 'row'},
   scrollView: {flex: 1, backgroundColor: silver},
   body: {
     flex: 1,
@@ -27,6 +28,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingVertical: 5,
   },
+  bottomBtnContainerL: {
+    flexDirection: 'column-reverse',
+    alignItems: 'center',
+    marginLeft: 10,
+  },
+  btnText: {textAlign: 'center'},
 });
 
 export default styles;

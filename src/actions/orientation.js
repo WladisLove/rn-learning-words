@@ -1,6 +1,6 @@
 import aTypes from './actionTypes';
 
-export const setIsPortraitOrientation = isPortrait => ({
-  type: aTypes.PORTRAIT_ORIENTATION_SET,
-  isPortrait,
+export const setIsLandscapeOrientation = isLandscape => ({
+  type: aTypes.LANDSCAPE_ORIENTATION_SET,
+  isLandscape,
 });

@@ -62,7 +62,8 @@ const Picker = ({text, value, onChange, data = []}) => {
         animationType="none"
         transparent
         visible={visible}
-        onRequestClose={closePicker}>
+        onRequestClose={closePicker}
+        supportedOrientations={['portrait', 'landscape']}>
         <TouchableOpacity
           style={styles.modalWrapper}
           activeOpacity={1}

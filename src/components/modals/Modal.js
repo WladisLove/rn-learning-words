@@ -51,7 +51,8 @@ const Modal = ({
       animationType={animationType}
       transparent
       visible={visible}
-      onRequestClose={onClose}>
+      onRequestClose={onClose}
+      supportedOrientations={['portrait', 'landscape']}>
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.mainContainer}>
           <ButtonIcon

@@ -21,6 +21,7 @@ const VocabularyModal = ({visible, items, onSave, onClose}) => {
     return errors;
   };
 
+  // TODO: add submit from input (by keyboard)
   const onSubmit = values => {
     const name = values.name.trim();
     const id = generateVocabularyID(name);

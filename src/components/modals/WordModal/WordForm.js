@@ -47,6 +47,8 @@ const WordForm = ({word, onSave, isLandscape}) => {
     meaning: !values.meaning ? 'Required' : undefined,
   });
 
+  // TODO: add submit from input (by keyboard)
+  // TODO: add focus on next field after completing current
   const onSubmit = values =>
     onSave({...values, id: witWord ? word.id : generateWordID(values.word)});
 

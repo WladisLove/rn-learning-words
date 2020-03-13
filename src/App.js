@@ -11,7 +11,9 @@ import {routes, screens} from './screens';
 import {green_light} from './color';
 
 const App = () => {
-  useEffect(() => SplashScreen.hide(), []);
+  useEffect(() => {
+    SplashScreen && SplashScreen.hide();
+  }, []);
 
   return (
     <Provider store={store}>

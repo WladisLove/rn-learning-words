@@ -3,13 +3,26 @@ import {green_light, silver} from '../../color';
 
 const styles = StyleSheet.create({
   root: {backgroundColor: green_light, flex: 1},
+  scrollViewContent: {
+    paddingTop: 10,
+    position: 'relative',
+  },
   backBtnWrapper: {
-    marginLeft: 10,
     marginTop: 10,
     alignItems: 'flex-start',
   },
-  showRestMargings: {marginVertical: 15},
-  cardsWrapper: {paddingHorizontal: 40},
+  backBtnWrapperL: {position: 'absolute', top: 0, left: 0, zIndex: 1},
+  showRestMarging: {marginTop: 15},
+  secFieldsArea: {
+    paddingHorizontal: 40,
+    marginTop: 15,
+  },
+  secFieldsAreaL: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  cardWrapperL: {width: '48%'},
   title: {fontSize: 16, marginBottom: 5},
   card: {
     padding: 20,

@@ -13,15 +13,20 @@ const emptyCard = (
   </View>
 );
 
-const LearnVocabulary = ({data, navigation, ...props}) => {
+const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
   const [mode, setMode] = useState(showModes[0]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isShown, setIsShown] = useState(false);
+  // don't change random order, when redux store is changed
+  const [_data] = useState([...data].sort((a, b) => 0.5 - Math.random()));
 
-  const onChangeMode = m => setMode(m);
+  const onChangeMode = m => {
+    setMode(m);
+    setIsShown(false);
+  };
   const show = () => setIsShown(true);
 
-  const word = data[currentIndex];
+  const word = _data[currentIndex];
 
   const goBack = () => navigation.goBack();
 
@@ -30,10 +35,18 @@ const LearnVocabulary = ({data, navigation, ...props}) => {
     setCurrentIndex(i);
   };
 
+  const isShownAll = isShown || mode === 'All';
+
   return (
     <SafeAreaView style={styles.root}>
-      <ScrollView bounces={false}>
-        <View style={styles.backBtnWrapper}>
+      <ScrollView
+        bounces={false}
+        contentContainerStyle={styles.scrollViewContent}>
+        <View
+          style={[
+            styles.backBtnWrapper,
+            isLandscape && styles.backBtnWrapperL,
+          ]}>
           <Button onPress={goBack}>Back</Button>
         </View>
         <Picker
@@ -43,39 +56,48 @@ const LearnVocabulary = ({data, navigation, ...props}) => {
           data={showModes}
         />
         <WordSlider
-          data={data}
+          data={_data}
           mode={mode}
-          isShown={isShown}
+          isShownAll={isShownAll}
           index={currentIndex}
           onIndexChange={handleChangeIndex}
           onEndReachedThreshold={0.9}
         />
-        <View style={[styles.centeredCard, styles.showRestMargings]}>
-          <Button onPress={show}>Show rest</Button>
-        </View>
-        {(isShown || mode === 'All') && (
-          <View style={styles.cardsWrapper}>
-            <Text style={styles.title}>Synonyms</Text>
-            {word.synonyms ? (
-              <View style={styles.card}>
-                <Text style={styles.text}>{word.synonyms}</Text>
-              </View>
-            ) : (
-              emptyCard
-            )}
+        {isShownAll ? (
+          <View
+            style={[
+              styles.secFieldsArea,
+              isLandscape && styles.secFieldsAreaL,
+            ]}>
+            <View style={isLandscape && styles.cardWrapperL}>
+              <Text style={styles.title}>Synonyms</Text>
+              {word.synonyms ? (
+                <View style={styles.card}>
+                  <Text style={styles.text}>{word.synonyms}</Text>
+                </View>
+              ) : (
+                emptyCard
+              )}
+            </View>
 
-            <Text style={styles.title}>Context</Text>
-            {word.context ? (
-              <View style={styles.card}>
-                {word.context.split('\n').map(item => (
-                  <Text key={item} style={styles.contextText}>
-                    - {item}
-                  </Text>
-                ))}
-              </View>
-            ) : (
-              emptyCard
-            )}
+            <View style={isLandscape && styles.cardWrapperL}>
+              <Text style={styles.title}>Context</Text>
+              {word.context ? (
+                <View style={styles.card}>
+                  {word.context.split('\n').map(item => (
+                    <Text key={item} style={styles.contextText}>
+                      - {item}
+                    </Text>
+                  ))}
+                </View>
+              ) : (
+                emptyCard
+              )}
+            </View>
+          </View>
+        ) : (
+          <View style={[styles.centeredCard, styles.showRestMarging]}>
+            <Button onPress={show}>Show rest</Button>
           </View>
         )}
       </ScrollView>

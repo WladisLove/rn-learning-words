@@ -1,21 +1,22 @@
 import React from 'react';
 import {View, Dimensions} from 'react-native';
 import {connect} from 'react-redux';
-import {setIsLandscapeOrientation} from '../../actions/orientation';
+import {setOrientationInfo} from '../../actions/orientation';
 
-const OrientationTracker = ({isLandscape, setIsLandscape}) => {
-  const setLandscape = () => {
+const OrientationTracker = ({isLandscape, screenW, setInfoHandler}) => {
+  const setInfo = () => {
     const {width, height} = Dimensions.get('window');
     const _isLandscape = width > height;
-    isLandscape !== _isLandscape && setIsLandscape(_isLandscape);
+    isLandscape !== _isLandscape &&
+      setInfoHandler({isLandscape: _isLandscape, screenW: width});
   };
 
-  if (isLandscape === undefined) {
-    setLandscape();
+  if (isLandscape === undefined || !screenW) {
+    setInfo();
   }
 
   const onLayout = () => {
-    setLandscape();
+    setInfo();
   };
 
   return <View onLayout={onLayout} />;
@@ -23,10 +24,11 @@ const OrientationTracker = ({isLandscape, setIsLandscape}) => {
 
 const mapStateToProps = ({orientStore}) => ({
   isLandscape: orientStore.isLandscape,
+  screenW: orientStore.screenW,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setIsLandscape: fl => dispatch(setIsLandscapeOrientation(fl)),
+  setInfoHandler: info => dispatch(setOrientationInfo(info)),
 });
 
 export default connect(

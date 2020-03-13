@@ -1,11 +1,7 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {silver, navy_dark} from '../../color';
+import {StyleSheet} from 'react-native';
+import {silver, navy_dark, green_light} from '../../color';
 
-const {width: screenW} = Dimensions.get('window');
-
-const navBtnWidth = 45;
-export const scrollableAreaWidth = screenW - navBtnWidth * 2 - 50;
-export const itemWidth = scrollableAreaWidth;
+export const navBtnWidth = 45;
 
 const navBtnIcon = {
   width: 20,
@@ -28,13 +24,11 @@ export const sliderStyles = StyleSheet.create({
   },
   navBtnIcon,
   navBtnIconLeft: {...navBtnIcon, transform: [{rotate: '180deg'}]},
-  listWrapper: {width: scrollableAreaWidth},
 });
 
 export const wordCardStyles = StyleSheet.create({
   wordCardWrapper: {
     paddingHorizontal: 20,
-    width: itemWidth,
   },
   wordCard: {
     minHeight: 200,
@@ -42,6 +36,13 @@ export const wordCardStyles = StyleSheet.create({
     backgroundColor: silver,
     borderRadius: 5,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  wordCardL: {
+    minHeight: 150,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   text: {
     textAlign: 'center',
@@ -49,5 +50,14 @@ export const wordCardStyles = StyleSheet.create({
     color: navy_dark,
     fontWeight: '700',
   },
-  divider: {fontSize: 16, marginVertical: 10},
+  textL: {flex: 0.48},
+  divider: {
+    width: 16,
+    height: 16,
+    marginVertical: 10,
+    backgroundColor: green_light,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: navy_dark,
+  },
 });

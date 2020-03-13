@@ -1,9 +1,10 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {View, Animated, FlatList, PanResponder} from 'react-native';
+import {connect} from 'react-redux';
 import ButtonIcon from '../ButtonIcon';
 import WordCard from './WordCard';
 import arrowRight from '../../assets/arrow-right.png';
-import {sliderStyles as styles, itemWidth, scrollableAreaWidth} from './styles';
+import {sliderStyles as styles, navBtnWidth} from './styles';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -13,16 +14,25 @@ const WordSlider = ({
   onIndexChange = () => {},
   onEndReached,
   onEndReachedThreshold,
+  screenW,
+  isLandscape,
   ...props
 }) => {
   let listRef;
   let panResponderRef = useRef({});
+  // 120 and 30 - additional margin between btns and slide-area
+  // 120px allow not to overflow screen (when 1 btn is hidden)
+  const slideAreaWidth = screenW - navBtnWidth * 2 - (isLandscape ? 120 : 30);
+
+  useEffect(() => {
+    listRef && listRef.scrollToIndex({animated: false, index});
+  }, [screenW]);
 
   const getRef = ref => ref && (listRef = ref._component || ref);
 
   const getItemLayout = (d, i) => ({
-    offset: itemWidth * i,
-    length: itemWidth,
+    offset: slideAreaWidth * i,
+    length: slideAreaWidth,
     index: i,
   });
 
@@ -39,7 +49,7 @@ const WordSlider = ({
 
   // PanResponder handlers
   const handlePanResponderMove = (e, {dx}) => {
-    const curOffset = index * itemWidth;
+    const curOffset = index * slideAreaWidth;
     const calcOffset = curOffset - dx;
     listRef.scrollToOffset({offset: calcOffset, animated: false});
   };
@@ -48,7 +58,7 @@ const WordSlider = ({
     // change index in cases when
     // user dragged more then 33% of scrollable area width
     // if not return to current index
-    Math.abs(dx) > scrollableAreaWidth / 3
+    Math.abs(dx) > slideAreaWidth / 3
       ? setIndex(!(dx > 0))
       : setIndex(null, index);
   };
@@ -72,7 +82,9 @@ const WordSlider = ({
         style={styles.navBtn}
         iconStyle={styles.navBtnIconLeft}
       />
-      <View style={styles.listWrapper} {...panResponderRef.current.panHandlers}>
+      <View
+        style={{width: slideAreaWidth}}
+        {...panResponderRef.current.panHandlers}>
         <AnimatedFlatList
           horizontal
           data={data}
@@ -84,7 +96,14 @@ const WordSlider = ({
           onEndReached={onEndReached}
           onEndReachedThreshold={onEndReachedThreshold}
           keyExtractor={item => item.id}
-          renderItem={({item}) => <WordCard item={item} {...props} />}
+          renderItem={({item}) => (
+            <WordCard
+              item={item}
+              slideAreaWidth={slideAreaWidth}
+              isLandscape={isLandscape}
+              {...props}
+            />
+          )}
         />
       </View>
       <ButtonIcon
@@ -97,4 +116,11 @@ const WordSlider = ({
   );
 };
 
-export default WordSlider;
+const mapStateToProps = ({orientStore: {isLandscape, screenW}}) => {
+  return {
+    isLandscape,
+    screenW,
+  };
+};
+
+export default connect(mapStateToProps)(WordSlider);

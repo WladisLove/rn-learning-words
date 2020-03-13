@@ -45,7 +45,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* LearningWordsAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LearningWordsAppTests.m; sourceTree = "<group>"; };
 		0C33D0443E6690577CDCB184 /* Pods-LearningWordsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearningWordsApp.release.xcconfig"; path = "Target Support Files/Pods-LearningWordsApp/Pods-LearningWordsApp.release.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* LearningWordsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningWordsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Learning Words.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learning Words.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = LearningWordsApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = LearningWordsApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -148,7 +148,6 @@
 				99F0CBB952E71FE58CF0A780 /* Pods-LearningWordsAppTests.debug.xcconfig */,
 				A54547D5D1AEEF20F3A2CD65 /* Pods-LearningWordsAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -190,7 +189,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* LearningWordsApp.app */,
+				13B07F961A680F5B00A75B9A /* Learning Words.app */,
 				00E356EE1AD99517003FC87E /* LearningWordsAppTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* LearningWordsApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* LearningWordsApp-tvOSTests.xctest */,
@@ -237,7 +236,7 @@
 			);
 			name = LearningWordsApp;
 			productName = LearningWordsApp;
-			productReference = 13B07F961A680F5B00A75B9A /* LearningWordsApp.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Learning Words.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* LearningWordsApp-tvOS */ = {
@@ -308,6 +307,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -597,7 +597,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LearningWordsApp.app/LearningWordsApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Learning Words.app/Learning Words";
 			};
 			name = Debug;
 		};
@@ -617,7 +617,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LearningWordsApp.app/LearningWordsApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Learning Words.app/Learning Words";
 			};
 			name = Release;
 		};
@@ -636,7 +636,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LearningWordsApp;
+				PRODUCT_NAME = "Learning Words";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -655,7 +655,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LearningWordsApp;
+				PRODUCT_NAME = "Learning Words";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

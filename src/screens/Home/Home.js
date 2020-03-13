@@ -28,7 +28,6 @@ const Home = ({vocabularies, isLandscape, setVocabulary, navigation}) => {
 
   return (
     <SafeAreaView style={[styles.root, isLandscape && styles.rootL]}>
-      {/*<StatusBar />*/}
       <ScrollView bounces={false} style={styles.scrollView}>
         <AppMotto />
         <View style={styles.body}>

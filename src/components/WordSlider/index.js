@@ -55,11 +55,10 @@ const WordSlider = ({
   };
 
   const handlePanResponderRelease = (e, {dx}) => {
-    // TODO: reduce requred are to swipe when in landscape mode
     // change index in cases when
-    // user dragged more then 33% of scrollable area width
+    // user dragged more then 33% (20% in landscape mode) of scrollable area width
     // if not return to current index
-    Math.abs(dx) > slideAreaWidth / 3
+    Math.abs(dx) > (isLandscape ? slideAreaWidth / 5 : slideAreaWidth / 3)
       ? setIndex(!(dx > 0))
       : setIndex(null, index);
   };

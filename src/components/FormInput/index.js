@@ -43,6 +43,7 @@ const FormInput = ({
   label,
   onSubmitEditing,
   returnKeyType,
+  ref,
   style = {},
   inputStyle = {},
   tooltipStyle = {},
@@ -61,6 +62,7 @@ const FormInput = ({
         placeholderTextColor={gray}
         onSubmitEditing={onSubmitEditing}
         returnKeyType={returnKeyType}
+        ref={ref}
         style={[
           styles.textInput,
           multiline &&

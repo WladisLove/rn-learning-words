@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Text, View} from 'react-native';
 import {Form, Field} from 'react-final-form';
 import FormInput from '../../FormInput';
@@ -13,12 +13,15 @@ const fieldsConfig = {
     placeholder: 'Word',
     inputProps: {
       label: 'Word:',
+      //onSubmitEditing={handleSubmit}
+      returnKeyType: 'next',
     },
   },
   meaning: {
     placeholder: 'Meaning',
     inputProps: {
       label: 'Meaning:',
+      returnKeyType: 'next',
     },
   },
   synonyms: {
@@ -26,6 +29,7 @@ const fieldsConfig = {
     inputProps: {
       label: 'Synonyms:',
       multiline: true,
+      //returnKeyType: 'next',
     },
   },
   context: {
@@ -33,6 +37,7 @@ const fieldsConfig = {
     inputProps: {
       label: 'Context:',
       multiline: true,
+      //returnKeyType: 'done',
     },
   },
 };
@@ -40,6 +45,25 @@ const fieldsConfig = {
 export let submitExternal = () => {};
 
 const WordForm = ({word, onSave, isLandscape}) => {
+  const meaningRef = useRef();
+  const synonymsRef = useRef();
+
+  const setRef = name => {
+    return name === 'meaning'
+      ? meaningRef
+      : name === 'synonyms'
+      ? synonymsRef
+      : undefined;
+  };
+
+  const submitEditingHandler = name => () => {
+    name === 'word'
+      ? meaningRef.current.focus()
+      : name === 'meaning'
+      ? synonymsRef.current.focus()
+      : undefined;
+  };
+
   const witWord = Boolean(word);
 
   const onValidate = values => ({
@@ -78,6 +102,8 @@ const WordForm = ({word, onSave, isLandscape}) => {
                     initialValue={witWord ? word[name] : undefined}>
                     {fieldProps => (
                       <FormInput
+                        ref={setRef(name)}
+                        onSubmitEditing={submitEditingHandler(name)}
                         style={mainFieldsStyle.field}
                         {...fieldProps}
                         {...conf.inputProps}
@@ -96,7 +122,11 @@ const WordForm = ({word, onSave, isLandscape}) => {
                   placeholder={conf.placeholder}
                   initialValue={witWord ? word[name] : undefined}>
                   {fieldProps => (
-                    <FormInput {...fieldProps} {...conf.inputProps} />
+                    <FormInput
+                      ref={setRef(name)}
+                      {...fieldProps}
+                      {...conf.inputProps}
+                    />
                   )}
                 </Field>
               );

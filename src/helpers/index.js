@@ -25,14 +25,16 @@ const checkVocabularyStructure = voc => {
 };
 
 const processWordsStructure = ({words}) => {
-  let newWords = [];
+  let newWords = {};
   if (words) {
     const wordIDs = Object.keys(words);
     newWords = wordIDs.reduce((acc, id) => {
       let word = words[id];
-      word.word && word.meaning && acc.push(word);
+      if (word.word && word.meaning) {
+        return {...acc, [id]: word};
+      }
       return acc;
-    }, []);
+    }, {});
   }
   return newWords;
 };

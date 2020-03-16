@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {SafeAreaView, View, Alert} from 'react-native';
-import RNFS from 'react-native-fs';
 import Button from '../../components/Button';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
 import useModal from '../../helpers/useModal';
+import {downloadVocabulary} from '../../helpers';
 import {routes} from '../index';
 
 import styles from './styles';
@@ -59,29 +59,11 @@ const Vocabulary = ({
     onCloseWord();
   };
 
-  const onDownload = () => {
-    // TODO: set correct directory for saving
-
-    // RNFS.DownloadDirectoryPath - Android only
-    let path = RNFS.DownloadDirectoryPath;
-    //let path = RNFS.DocumentDirectoryPath;
-    //let path = '/Users/uklimiankou/Documents' + '/test2.json';
-    let obj = {test: 'test object 3'};
-    // RNFS.mkdir(path)
-    //   .then(result => {
-    //     console.log('result', result);
-    RNFS.writeFile(path + '/test2.json', JSON.stringify(obj), 'utf8')
-      .then(success => {
-        Alert.alert('FILE WRITTEN!', `${path}`);
-      })
-      .catch(err => {
-        Alert.alert('Write error!', `${err.message}`);
-      });
-    // })
-    // .catch(err => {
-    //   console.warn('err', err);
-    // });
-  };
+  const onDownload = () =>
+    downloadVocabulary(
+      text => Alert.alert('Write success!', `${text}`),
+      text => Alert.alert('Write error!', `${text}`),
+    );
 
   const onRun = () => navigation.push(routes.LEARN_VOCABULARY, {vocabularyId});
 

@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import {PermissionsAndroid, Platform} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
 
@@ -90,5 +90,46 @@ export const loadVocabulary = async (
   } catch (err) {
     console.log(err);
     finishLoading();
+  }
+};
+
+export const downloadVocabulary = async (onSuccess, onError) => {
+  // TODO: set correct directory for saving
+
+  if (!isIOS) {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: 'Learning Word App Storage Permission',
+          message:
+            'Learning Word App needs access to Download directory to download vocabulary',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // RNFS.DownloadDirectoryPath - Android only
+        let path = RNFS.DownloadDirectoryPath;
+        //let path = RNFS.DocumentDirectoryPath;
+        //let path = '/Users/uklimiankou/Documents' + '/test2.json';
+        let obj = {test: 'test object 3'};
+        // RNFS.mkdir(path)
+        //   .then(result => {
+        //     console.log('result', result);
+        RNFS.writeFile(path + '/test2.json', JSON.stringify(obj), 'utf8')
+          .then(success => onSuccess(`path: ${path}`))
+          .catch(err => onError(`write error: ${err.message}`));
+        // })
+        // .catch(err => {
+        //   console.warn('err', err);
+        // });
+      } else {
+        onError('Error. Permission denied');
+      }
+    } catch (error) {
+      onError(`Permission error: ${error.message}`);
+    }
   }
 };

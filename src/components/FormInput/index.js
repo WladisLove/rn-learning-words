@@ -41,6 +41,8 @@ const FormInput = ({
   multiline = false,
   numberOfLines,
   label,
+  onSubmitEditing,
+  returnKeyType,
   style = {},
   inputStyle = {},
   tooltipStyle = {},
@@ -57,6 +59,8 @@ const FormInput = ({
         placeholder={placeholder}
         underlineColorAndroid="transparent"
         placeholderTextColor={gray}
+        onSubmitEditing={onSubmitEditing}
+        returnKeyType={returnKeyType}
         style={[
           styles.textInput,
           multiline &&

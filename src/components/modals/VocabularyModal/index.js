@@ -48,7 +48,13 @@ const VocabularyModal = ({visible, items, onSave, onClose}) => {
           return (
             <>
               <Field name="name" placeholder="Vocabulary name">
-                {fieldProps => <FormInput {...fieldProps} />}
+                {fieldProps => (
+                  <FormInput
+                    {...fieldProps}
+                    onSubmitEditing={handleSubmit}
+                    returnKeyType="done"
+                  />
+                )}
               </Field>
               {submitError && (
                 <Text style={styles.errorTip}>{submitError}</Text>

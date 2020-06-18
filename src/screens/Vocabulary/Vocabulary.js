@@ -63,6 +63,7 @@ const Vocabulary = ({
 
   const onDownload = () =>
     downloadVocabulary(
+      vocabulary,
       text => Alert.alert('Write success!', `${text}`),
       text => Alert.alert('Write error!', `${text}`),
     );

@@ -5,9 +5,12 @@ const mapStateToProps = (
   {vocStore: {vocabularies}, orientStore: {isLandscape}},
   {route: {params = {}}},
 ) => {
-  const {vocabularyId} = params;
+  const {vocabularyId, wordsLvl} = params;
   const {words = {}} = vocabularies[vocabularyId] || {};
-  const data = Object.values(words);
+  const data =
+    wordsLvl === 0
+      ? Object.values(words)
+      : Object.values(words).filter(({lvl = 2}) => lvl === wordsLvl);
   return {
     vocabularyId,
     isLandscape,

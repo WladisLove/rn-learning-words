@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 5,
   },
+  lvlBtnsContainer: {
+    flexDirection: 'row',
+    backgroundColor: green_light,
+  },
 });
 
 export default styles;

@@ -18,21 +18,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   mainContainer: {
-    position: 'relative',
     backgroundColor: 'white',
     width: '85%',
     maxWidth: 350,
     marginVertical: 40,
     paddingHorizontal: 10,
-    paddingTop: 50,
-    paddingBottom: 20,
+    paddingVertical: 20,
+  },
+  prefixContainer: {
+    position: 'relative',
+    height: 30,
+    width: '100%',
+    marginBottom: 10,
   },
   scrollViewContent: {paddingHorizontal: 10},
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  closeBtn: {padding: 5, position: 'absolute', top: 7, right: 7},
+  closeBtn: {padding: 5, position: 'absolute', right: 7},
   closeIcon: {width: 17, height: 17},
 });
 
@@ -44,6 +48,7 @@ const Modal = ({
   onCancel,
   onOk,
   onClose,
+  prefixContent = null,
   children,
   contentStyle = {},
 }) => {
@@ -56,12 +61,15 @@ const Modal = ({
       supportedOrientations={['portrait', 'landscape']}>
       <SafeAreaView style={styles.wrapper}>
         <View style={[styles.mainContainer, contentStyle]}>
-          <ButtonIcon
-            src={close}
-            onPress={onClose}
-            iconStyle={styles.closeIcon}
-            style={styles.closeBtn}
-          />
+          <View style={styles.prefixContainer}>
+            {prefixContent}
+            <ButtonIcon
+              src={close}
+              onPress={onClose}
+              iconStyle={styles.closeIcon}
+              style={styles.closeBtn}
+            />
+          </View>
           <ScrollView
             bounces={false}
             contentContainerStyle={styles.scrollViewContent}>

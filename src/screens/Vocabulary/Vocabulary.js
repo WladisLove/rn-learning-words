@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {SafeAreaView, View, Alert} from 'react-native';
 import Button from '../../components/Button';
+import ButtonLvl from '../../components/ButtonLvl';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
@@ -24,6 +25,7 @@ const Vocabulary = ({
   const [wordModalVisible, openWordModal, closeWordModal] = useModal(false);
   const [selectedWordID, selectWordID] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
+  const [wordsLvl, setWordsLvl] = useState(0);
 
   const goBack = () => navigation.goBack();
   const deleteHandler = () => {
@@ -65,16 +67,21 @@ const Vocabulary = ({
       text => Alert.alert('Write error!', `${text}`),
     );
 
-  const onRun = () => navigation.push(routes.LEARN_VOCABULARY, {vocabularyId});
+  const onRun = () =>
+    navigation.push(routes.LEARN_VOCABULARY, {vocabularyId, wordsLvl});
 
   const onWordPress = wordID => {
     selectWordID(wordID);
     openWordModal();
   };
 
-  //console.log('vocabulary', vocabulary);
+  const onLvlSelect = lvl => () => setWordsLvl(lvl);
 
   const selectedWord = selectedWordID ? words[selectedWordID] : null;
+  const sortedWords =
+    wordsLvl === 0
+      ? Object.values(words)
+      : Object.values(words).filter(({lvl = 2}) => lvl === wordsLvl);
 
   return (
     <SafeAreaView style={styles.root}>
@@ -90,8 +97,14 @@ const Vocabulary = ({
         isLandscape={isLandscape}
         onAdd={openWordModal}
       />
+      <View style={styles.lvlBtnsContainer}>
+        <ButtonLvl lvl={0} selectedLvl={wordsLvl} onPress={onLvlSelect(0)} />
+        <ButtonLvl lvl={1} selectedLvl={wordsLvl} onPress={onLvlSelect(1)} />
+        <ButtonLvl lvl={2} selectedLvl={wordsLvl} onPress={onLvlSelect(2)} />
+        <ButtonLvl lvl={3} selectedLvl={wordsLvl} onPress={onLvlSelect(3)} />
+      </View>
       <WordsList
-        items={words}
+        items={sortedWords}
         onWordPress={onWordPress}
         searchQuery={searchQuery}
       />

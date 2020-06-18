@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import LearnVocabulary from './LearnVocabulary';
+import {setWord} from '../../actions/vocabulary';
 
 const mapStateToProps = (
   {vocStore: {vocabularies}, orientStore: {isLandscape}},
@@ -13,10 +14,20 @@ const mapStateToProps = (
       : Object.values(words).filter(({lvl = 2}) => lvl === wordsLvl);
   return {
     vocabularyId,
+    wordsLvl,
     isLandscape,
     data,
     onEndReachedThreshold: 0.9,
   };
 };
 
-export default connect(mapStateToProps)(LearnVocabulary);
+const mapDispatchToProps = dispatch => {
+  return {
+    setWord: (word, vocId) => dispatch(setWord(word, vocId)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LearnVocabulary);

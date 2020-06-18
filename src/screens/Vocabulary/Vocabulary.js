@@ -99,10 +99,15 @@ const Vocabulary = ({
         onAdd={openWordModal}
       />
       <View style={styles.lvlBtnsContainer}>
-        <ButtonLvl lvl={0} selectedLvl={wordsLvl} onPress={onLvlSelect(0)} />
-        <ButtonLvl lvl={1} selectedLvl={wordsLvl} onPress={onLvlSelect(1)} />
-        <ButtonLvl lvl={2} selectedLvl={wordsLvl} onPress={onLvlSelect(2)} />
-        <ButtonLvl lvl={3} selectedLvl={wordsLvl} onPress={onLvlSelect(3)} />
+        {[0, 1, 2, 3].map(lvl => (
+          <ButtonLvl
+            key={lvl}
+            lvl={lvl}
+            selectedLvl={wordsLvl}
+            onPress={onLvlSelect(lvl)}
+            style={styles.lvlBtn}
+          />
+        ))}
       </View>
       <WordsList
         items={sortedWords}

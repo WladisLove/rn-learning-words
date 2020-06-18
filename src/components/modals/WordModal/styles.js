@@ -3,7 +3,7 @@ import {red} from '../../../color';
 
 export const modalStyles = StyleSheet.create({
   contentL: {maxWidth: 500, marginVertical: 30, paddingTop: 40},
-  lvlBtn: {width: 80, borderRadius: 5},
+  lvlBtn: {borderRadius: 5},
 });
 
 export const formStyles = StyleSheet.create({

@@ -9,7 +9,9 @@ const styles = StyleSheet.create({
   },
   backBtnWrapper: {
     marginTop: 10,
-    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   backBtnWrapperL: {position: 'absolute', top: 0, left: 0, zIndex: 1},
   showRestMarging: {marginTop: 15},
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
   minus: {width: 30, height: 1, backgroundColor: 'black'},
   text: {fontSize: 18},
   contextText: {fontSize: 18},
+  lvlBtn: {borderRadius: 5, marginRight: 10},
 });
 
 export default styles;

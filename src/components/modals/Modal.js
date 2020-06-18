@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   },
   prefixContainer: {
     position: 'relative',
+    flexDirection: 'row',
     height: 30,
     width: '100%',
     marginBottom: 10,

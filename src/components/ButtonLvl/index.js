@@ -5,12 +5,12 @@ import {blue_vivid, gray, green_light} from '../../color';
 const styles = StyleSheet.create({
   button: {
     paddingVertical: 7,
+    paddingHorizontal: 7,
     borderWidth: 1,
     borderColor: gray,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     flexDirection: 'row',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: green_light,

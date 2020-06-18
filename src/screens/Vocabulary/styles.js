@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: green_light,
   },
+  lvlBtn: {flex: 1},
 });
 
 export default styles;

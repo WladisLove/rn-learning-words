@@ -26,7 +26,7 @@ const WordSlider = ({
 
   useEffect(() => {
     listRef && listRef.scrollToIndex({animated: false, index});
-  }, [screenW]);
+  }, [screenW, data.length]);
 
   const getRef = ref => ref && (listRef = ref._component || ref);
 

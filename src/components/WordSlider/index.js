@@ -74,10 +74,13 @@ const WordSlider = ({
     //onPanResponderTerminationRequest: this.handleGestureTerminationRequest,
   });
 
+  const isLastItem = index === data.length - 1;
+  const isFirstItem = index === 0;
+
   return (
     <View style={styles.mainContainer}>
       <ButtonIcon
-        src={arrowRight}
+        src={!isFirstItem && arrowRight}
         onPress={setIndex.bind(null, false)}
         style={styles.navBtn}
         iconStyle={styles.navBtnIconLeft}
@@ -107,7 +110,7 @@ const WordSlider = ({
         />
       </View>
       <ButtonIcon
-        src={arrowRight}
+        src={!isLastItem && arrowRight}
         onPress={setIndex.bind(null, true)}
         style={styles.navBtn}
         iconStyle={styles.navBtnIcon}

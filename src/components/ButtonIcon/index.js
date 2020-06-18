@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 const ButtonIcon = ({src, style = {}, iconStyle = {}, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
-      <Image source={src} style={[styles.iconStyle, iconStyle]} />
+      {src && <Image source={src} style={[styles.iconStyle, iconStyle]} />}
     </TouchableOpacity>
   );
 };

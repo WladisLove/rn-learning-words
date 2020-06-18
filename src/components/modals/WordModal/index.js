@@ -3,9 +3,9 @@ import Modal from '../Modal';
 import WordForm, {submitExternal} from './WordForm';
 import WordInfoArea from './WordInfoArea';
 import ButtonLvl from '../../ButtonLvl';
+import WordLvlPopup from '../../popups/WordLvlPopup';
 import useModal from '../../../helpers/useModal';
 import {modalStyles as styles} from './styles';
-import {View} from 'react-native';
 
 const WordModal = props => {
   const {
@@ -31,9 +31,8 @@ const WordModal = props => {
     setEditable(false);
   };
 
-  const setWordLvl = lvl => () => {
+  const setWordLvl = lvl => {
     updateHandler({...word, lvl});
-    closeLvlModal();
   };
 
   const onApplyChanges = withWord ? updateHandler : onSave;
@@ -73,28 +72,12 @@ const WordModal = props => {
         <WordInfoArea word={word} onEdit={onStartEdit} onDelete={onDelete} />
       )}
 
-      <Modal visible={lvlModalVisible} onClose={closeLvlModal}>
-        <View style={{flexDirection: 'column', alignItems: 'center'}}>
-          <ButtonLvl
-            lvl={1}
-            selectedLvl={wordLvl}
-            onPress={setWordLvl(1)}
-            style={styles.lvlBtn}
-          />
-          <ButtonLvl
-            lvl={2}
-            selectedLvl={wordLvl}
-            onPress={setWordLvl(2)}
-            style={styles.lvlBtn}
-          />
-          <ButtonLvl
-            lvl={3}
-            selectedLvl={wordLvl}
-            onPress={setWordLvl(3)}
-            style={styles.lvlBtn}
-          />
-        </View>
-      </Modal>
+      <WordLvlPopup
+        visible={lvlModalVisible}
+        onClose={closeLvlModal}
+        onSetLvl={setWordLvl}
+        wordLvl={wordLvl}
+      />
     </Modal>
   );
 };

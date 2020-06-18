@@ -4,7 +4,7 @@ import WordSlider from '../../components/WordSlider';
 import Picker from '../../components/Picker';
 import Button from '../../components/Button';
 import ButtonLvl from '../../components/ButtonLvl';
-import Modal from '../../components/modals/Modal';
+import WordLvlPopup from '../../components/popups/WordLvlPopup';
 import useModal from '../../helpers/useModal';
 import styles from './styles';
 
@@ -42,13 +42,13 @@ const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
     setCurrentIndex(i);
   };
 
-  const changeWordLvl = lvl => () => {
+  const changeWordLvl = lvl => {
     props.setWord({...word, lvl}, props.vocabularyId);
     closeLvlModal();
     if (props.wordsLvl === 0) {
       // change word from array when all lvl words is displayed
       _data[currentIndex] = {..._data[currentIndex], lvl};
-    } else if (props.wordsLvl !== lvl) {
+    } else {
       if (_data.length === 1) {
         goBack();
         return;
@@ -137,28 +137,13 @@ const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
           )}
         </ScrollView>
       </SafeAreaView>
-      <Modal visible={lvlModalVisible} onClose={closeLvlModal}>
-        <View style={{flexDirection: 'column', alignItems: 'center'}}>
-          <ButtonLvl
-            lvl={1}
-            selectedLvl={wordLvl}
-            onPress={changeWordLvl(1)}
-            style={styles.lvlBtn}
-          />
-          <ButtonLvl
-            lvl={2}
-            selectedLvl={wordLvl}
-            onPress={changeWordLvl(2)}
-            style={styles.lvlBtn}
-          />
-          <ButtonLvl
-            lvl={3}
-            selectedLvl={wordLvl}
-            onPress={changeWordLvl(3)}
-            style={styles.lvlBtn}
-          />
-        </View>
-      </Modal>
+
+      <WordLvlPopup
+        visible={lvlModalVisible}
+        onClose={closeLvlModal}
+        onSetLvl={changeWordLvl}
+        wordLvl={wordLvl}
+      />
     </>
   );
 };

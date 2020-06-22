@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Popup = ({visible, onClose, children}) => {
+const Popup = ({visible, onClose, style = {}, children}) => {
   return (
     <Modal
       animationType="none"
@@ -33,7 +33,7 @@ const Popup = ({visible, onClose, children}) => {
         style={styles.root}
         activeOpacity={1}
         onPressOut={onClose}>
-        <View style={styles.wrapper}>{children}</View>
+        <View style={[styles.wrapper, style]}>{children}</View>
       </TouchableOpacity>
     </Modal>
   );

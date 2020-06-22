@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 7,
   },
   pickerItemText: {fontSize: 18},
+  pickerContent: {paddingVertical: 10},
 });
 
 export default styles;

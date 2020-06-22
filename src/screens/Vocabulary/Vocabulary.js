@@ -85,40 +85,36 @@ const Vocabulary = ({
       : Object.values(words).filter(({lvl = 2}) => lvl === wordsLvl);
 
   return (
-    <SafeAreaView style={styles.root}>
-      <VocabularyScreenHeader
-        vocabulary={vocabulary}
-        onBack={goBack}
-        onEdit={onChangeName}
-        onDelete={onDelete}
-        onDownload={onDownload}
-        onRun={onRun}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        isLandscape={isLandscape}
-        onAdd={openWordModal}
-      />
-      <View style={styles.lvlBtnsContainer}>
-        {[0, 1, 2, 3].map(lvl => (
-          <ButtonLvl
-            key={lvl}
-            lvl={lvl}
-            selectedLvl={wordsLvl}
-            onPress={onLvlSelect(lvl)}
-            style={styles.lvlBtn}
-          />
-        ))}
-      </View>
-      <WordsList
-        items={sortedWords}
-        onWordPress={onWordPress}
-        searchQuery={searchQuery}
-      />
-      {!isLandscape && (
-        <View style={styles.bottomBtnContainer}>
-          <Button onPress={openWordModal}>Add word</Button>
+    <>
+      <SafeAreaView style={styles.root}>
+        <VocabularyScreenHeader
+          vocabulary={vocabulary}
+          onBack={goBack}
+          onEdit={onChangeName}
+          onDelete={onDelete}
+          onDownload={onDownload}
+          onRun={onRun}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          onAdd={openWordModal}
+        />
+        <View style={styles.lvlBtnsContainer}>
+          {[0, 1, 2, 3].map(lvl => (
+            <ButtonLvl
+              key={lvl}
+              lvl={lvl}
+              selectedLvl={wordsLvl}
+              onPress={onLvlSelect(lvl)}
+              style={styles.lvlBtn}
+            />
+          ))}
         </View>
-      )}
+        <WordsList
+          items={sortedWords}
+          onWordPress={onWordPress}
+          searchQuery={searchQuery}
+        />
+      </SafeAreaView>
       <WordModal
         visible={wordModalVisible}
         word={selectedWord}
@@ -128,7 +124,7 @@ const Vocabulary = ({
         onDelete={onDeleteWord}
         isLandscape={isLandscape}
       />
-    </SafeAreaView>
+    </>
   );
 };
 

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import VocabularyNameForm from './VocabularyNameForm';
 import ButtonIcon from '../ButtonIcon';
-import Button from '../Button';
 import SearchInput from '../SearchInput';
 import {isIOS} from '../../helpers';
 import arrowRight from '../../assets/arrow-right.png';
@@ -11,6 +10,7 @@ import deleteIcon from '../../assets/delete.png';
 import runIcon from '../../assets/run.png';
 import findIcon from '../../assets/find.png';
 import downloadIcon from '../../assets/download.png';
+import addIcon from '../../assets/plus.png';
 
 import {headerStyles as styles} from './styles';
 
@@ -28,7 +28,6 @@ const VocabularyScreenHeader = ({
   onRun,
   searchQuery,
   setSearchQuery,
-  isLandscape,
   onAdd,
 }) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -83,11 +82,7 @@ const VocabularyScreenHeader = ({
                     onPress={onDelete}
                     {...iconBtnStyle}
                   />
-                  {isLandscape && (
-                    <View style={styles.addWordBtnWrapper}>
-                      <Button onPress={onAdd}>Add word</Button>
-                    </View>
-                  )}
+                  <ButtonIcon src={addIcon} onPress={onAdd} {...iconBtnStyle} />
                 </>
               ) : (
                 <SearchInput

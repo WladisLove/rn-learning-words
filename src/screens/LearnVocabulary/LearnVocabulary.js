@@ -44,6 +44,7 @@ const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
 
   const changeWordLvl = lvl => {
     props.setWord({...word, lvl}, props.vocabularyId);
+    setIsShown(false);
     closeLvlModal();
     if (props.wordsLvl === 0) {
       // change word from array when all lvl words is displayed

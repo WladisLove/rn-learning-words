@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  backBtnWrapperL: {position: 'absolute', top: 0, left: 0, zIndex: 1},
+  backBtnWrapperL: {marginTop: 5},
   showRestMarging: {marginTop: 15},
   secFieldsArea: {
     paddingHorizontal: 40,

@@ -37,15 +37,15 @@ const FormInput = ({
   input,
   meta,
   submitError = '',
-  placeholder,
   multiline = false,
   numberOfLines,
   label,
-  onSubmitEditing,
-  returnKeyType,
   style = {},
   inputStyle = {},
   tooltipStyle = {},
+  // in restProps may be used:
+  // placeholder, onSubmitEditing, returnKeyType, autoCapitalize
+  ...restProps
 }) => {
   const isError = (meta.error && meta.touched) || Boolean(submitError);
   return (
@@ -54,13 +54,11 @@ const FormInput = ({
       {label && <Text>{label}</Text>}
       <TextInput
         {...input}
+        {...restProps}
         multiline={multiline}
         numberOfLines={numberOfLines}
-        placeholder={placeholder}
         underlineColorAndroid="transparent"
         placeholderTextColor={gray}
-        onSubmitEditing={onSubmitEditing}
-        returnKeyType={returnKeyType}
         style={[
           styles.textInput,
           multiline &&

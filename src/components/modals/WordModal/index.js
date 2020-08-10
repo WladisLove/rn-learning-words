@@ -7,6 +7,8 @@ import WordLvlPopup from '../../popups/WordLvlPopup';
 import useModal from '../../../helpers/useModal';
 import {modalStyles as styles} from './styles';
 
+const DEFAULT_WORD_LVL = 2;
+
 const WordModal = props => {
   const {
     visible,
@@ -17,26 +19,38 @@ const WordModal = props => {
     onDelete,
     isLandscape,
   } = props;
-  const {lvl: wordLvl = 2} = word || {};
   const withWord = Boolean(word);
+  const [lvl, setLvl] = useState(word?.lvl || DEFAULT_WORD_LVL);
   const [editable, setEditable] = useState(!withWord);
   const [lvlModalVisible, openLvlModal, closeLvlModal] = useModal(false);
 
   const onStartEdit = () => setEditable(true);
+  const resetLvl = () => setLvl(DEFAULT_WORD_LVL);
 
   useEffect(() => setEditable(!withWord), [visible]);
+  useEffect(() => setLvl(word?.lvl || DEFAULT_WORD_LVL), [word, word?.lvl]);
 
   const updateHandler = w => {
     onUpdate(w);
     setEditable(false);
   };
 
-  const setWordLvl = lvl => {
-    updateHandler({...word, lvl});
+  const setWordLvl = _lvl => {
+    withWord ? updateHandler({...word, lvl: _lvl}) : setLvl(_lvl);
   };
 
-  const onApplyChanges = withWord ? updateHandler : onSave;
-  const onCancelChanges = withWord ? () => setEditable(false) : onClose;
+  const closeModal = () => {
+    onClose();
+    resetLvl();
+  };
+
+  const saveWord = w => {
+    onSave({...w, lvl});
+    resetLvl();
+  };
+
+  const onApplyChanges = withWord ? updateHandler : saveWord;
+  const onCancelChanges = withWord ? () => setEditable(false) : closeModal;
 
   const modalBtnConfig = editable
     ? {
@@ -49,16 +63,14 @@ const WordModal = props => {
   return (
     <Modal
       visible={visible}
-      onClose={onClose}
+      onClose={closeModal}
       prefixContent={
-        withWord && (
-          <ButtonLvl
-            lvl={wordLvl}
-            selectedLvl={wordLvl}
-            onPress={openLvlModal}
-            style={styles.lvlBtn}
-          />
-        )
+        <ButtonLvl
+          lvl={lvl}
+          selectedLvl={lvl}
+          onPress={openLvlModal}
+          style={styles.lvlBtn}
+        />
       }
       contentStyle={isLandscape ? styles.contentL : {}}
       {...modalBtnConfig}>
@@ -76,7 +88,7 @@ const WordModal = props => {
         visible={lvlModalVisible}
         onClose={closeLvlModal}
         onSetLvl={setWordLvl}
-        wordLvl={wordLvl}
+        wordLvl={lvl}
       />
     </Modal>
   );

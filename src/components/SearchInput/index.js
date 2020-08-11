@@ -26,6 +26,7 @@ const SearchInput = ({searchQuery, setSearchQuery}) => {
         autoCapitalize="none"
         value={searchQuery}
         style={styles.input}
+        autoFocus
       />
       <ButtonIcon
         src={close}

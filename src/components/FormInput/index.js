@@ -44,7 +44,7 @@ const FormInput = ({
   inputStyle = {},
   tooltipStyle = {},
   // in restProps may be used:
-  // placeholder, onSubmitEditing, returnKeyType, autoCapitalize
+  // placeholder, onSubmitEditing, returnKeyType, autoCapitalize, autoFocus
   ...restProps
 }) => {
   const isError = (meta.error && meta.touched) || Boolean(submitError);

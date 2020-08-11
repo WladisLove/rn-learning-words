@@ -47,6 +47,7 @@ const VocabularyNameForm = ({
                   style={styles.field}
                   inputStyle={styles.input}
                   tooltipStyle={styles.tooltip}
+                  autoFocus
                 />
               )}
             </Field>

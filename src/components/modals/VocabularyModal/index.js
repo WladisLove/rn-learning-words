@@ -53,6 +53,7 @@ const VocabularyModal = ({visible, items, onSave, onClose}) => {
                     {...fieldProps}
                     onSubmitEditing={handleSubmit}
                     returnKeyType="done"
+                    autoFocus
                   />
                 )}
               </Field>

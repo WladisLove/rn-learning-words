@@ -24,7 +24,7 @@ const iBtnStyle = {
   iconStyle: styles.iconInBtn,
 };
 
-const Home = ({vocabularies, setVoc, deleteVoc, navigation}) => {
+const Home = ({vocabularies, setVoc, deleteVoc, changeVocName, navigation}) => {
   const [modalVisible, showModal, closeModal] = useModal(false);
   const [popupVisible, openPopup, closePopup] = useModal(false);
   const [selectedVocId, setVocId] = useState(null);
@@ -43,8 +43,9 @@ const Home = ({vocabularies, setVoc, deleteVoc, navigation}) => {
   };
 
   const onSaveVoc = voc => {
-    setVoc(voc);
+    selectedVocId ? changeVocName(selectedVocId, voc) : setVoc(voc);
     closeModal();
+    setVocId(null);
   };
 
   const onLoadVoc = () => {
@@ -56,6 +57,11 @@ const Home = ({vocabularies, setVoc, deleteVoc, navigation}) => {
   const deleteVocHandler = () => {
     deleteVoc(selectedVocId);
     onClosePopup();
+  };
+
+  const onRenameVoc = () => {
+    closePopup();
+    showModal();
   };
 
   const onDeleteVoc = () =>
@@ -96,7 +102,7 @@ const Home = ({vocabularies, setVoc, deleteVoc, navigation}) => {
       </SafeAreaView>
       <Popup visible={popupVisible} onClose={onClosePopup}>
         <Text>popup</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onRenameVoc}>
           <Text>Rename</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onDeleteVoc}>
@@ -113,6 +119,7 @@ const Home = ({vocabularies, setVoc, deleteVoc, navigation}) => {
         onSave={onSaveVoc}
         onClose={closeModal}
         items={vocabularies}
+        initialValues={{name: vocabularies[selectedVocId]?.name}}
       />
     </>
   );

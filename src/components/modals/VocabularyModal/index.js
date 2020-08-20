@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   errorTip: {color: red, fontSize: 16},
 });
 
-const VocabularyModal = ({visible, items, onSave, onClose}) => {
+const VocabularyModal = ({visible, items, onSave, onClose, initialValues}) => {
   const onValidate = values => {
     const errors = {};
     if (!values.name) {
@@ -43,6 +43,7 @@ const VocabularyModal = ({visible, items, onSave, onClose}) => {
       <Form
         onSubmit={onSubmit}
         validate={onValidate}
+        initialValues={initialValues}
         render={({handleSubmit, submitError}) => {
           submitExternal = handleSubmit;
           return (

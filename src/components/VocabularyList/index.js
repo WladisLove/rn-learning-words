@@ -28,21 +28,22 @@ const VocabularyList = ({vocabularies = {}, onPress, onLongPress}) => {
   const pressHandler = id => () => onPress(id);
   const longPressHandler = id => () => onLongPress(id);
 
-  let items = [];
-  for (let [id, item] of Object.entries(vocabularies)) {
-    items.push(
-      <TouchableOpacity
-        key={id}
-        onPress={pressHandler(id)}
-        onLongPress={longPressHandler(id)}
-        style={styles.container}>
-        <Text style={styles.text}>{item.name}</Text>
-        <Image source={arrowRight} style={styles.icon} />
-      </TouchableOpacity>,
-    );
-  }
-
-  return <View>{items}</View>;
+  return (
+    <View>
+      {Object.keys(vocabularies)
+        .sort()
+        .map(vocId => (
+          <TouchableOpacity
+            key={vocId}
+            onPress={pressHandler(vocId)}
+            onLongPress={longPressHandler(vocId)}
+            style={styles.container}>
+            <Text style={styles.text}>{vocabularies[vocId].name}</Text>
+            <Image source={arrowRight} style={styles.icon} />
+          </TouchableOpacity>
+        ))}
+    </View>
+  );
 };
 
 export default VocabularyList;

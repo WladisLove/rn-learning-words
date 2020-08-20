@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {SafeAreaView, View, Alert} from 'react-native';
-import Button from '../../components/Button';
 import ButtonLvl from '../../components/ButtonLvl';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';

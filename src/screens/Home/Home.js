@@ -13,7 +13,7 @@ import VocabularyModal from '../../components/modals/VocabularyModal';
 import ButtonIcon from '../../components/ButtonIcon';
 import Popup from '../../components/popups/Popup';
 import {routes} from '../index';
-import {loadVocabulary, isIOS} from '../../helpers';
+import {loadVocabulary, isIOS, downloadVocabulary} from '../../helpers';
 import useModal from '../../helpers/useModal';
 import addIcon from '../../assets/plus.png';
 import uploadIcon from '../../assets/upload.png';
@@ -74,6 +74,13 @@ const Home = ({vocabularies, setVoc, deleteVoc, changeVocName, navigation}) => {
       ],
     );
 
+  const onDownload = () =>
+    downloadVocabulary(
+      vocabularies[selectedVocId],
+      text => Alert.alert('Write success!', `${text}`),
+      text => Alert.alert('Write error!', `${text}`),
+    );
+
   return (
     <>
       <SafeAreaView style={styles.root}>
@@ -114,7 +121,7 @@ const Home = ({vocabularies, setVoc, deleteVoc, changeVocName, navigation}) => {
           <Text style={styles.popupItemText}>Delete</Text>
         </TouchableOpacity>
         {!isIOS && (
-          <TouchableOpacity style={styles.popupItem}>
+          <TouchableOpacity onPress={onDownload} style={styles.popupItem}>
             <Text style={styles.popupItemText}>Download</Text>
           </TouchableOpacity>
         )}

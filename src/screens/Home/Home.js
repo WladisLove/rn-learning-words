@@ -101,16 +101,21 @@ const Home = ({vocabularies, setVoc, deleteVoc, changeVocName, navigation}) => {
         </ScrollView>
       </SafeAreaView>
       <Popup visible={popupVisible} onClose={onClosePopup}>
-        <Text>popup</Text>
-        <TouchableOpacity onPress={onRenameVoc}>
-          <Text>Rename</Text>
+        <Text style={styles.popupHeaderText}>
+          Actions with vocabulary{' '}
+          <Text style={{fontWeight: '700'}}>
+            {vocabularies[selectedVocId]?.name}
+          </Text>
+        </Text>
+        <TouchableOpacity onPress={onRenameVoc} style={styles.popupItem}>
+          <Text style={styles.popupItemText}>Rename</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onDeleteVoc}>
-          <Text>Delete</Text>
+        <TouchableOpacity onPress={onDeleteVoc} style={styles.popupItem}>
+          <Text style={styles.popupItemText}>Delete</Text>
         </TouchableOpacity>
         {!isIOS && (
-          <TouchableOpacity>
-            <Text>Download</Text>
+          <TouchableOpacity style={styles.popupItem}>
+            <Text style={styles.popupItemText}>Download</Text>
           </TouchableOpacity>
         )}
       </Popup>

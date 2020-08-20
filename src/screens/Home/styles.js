@@ -30,6 +30,19 @@ const styles = StyleSheet.create({
   iconBtnContainer: {flexDirection: 'row'},
   btnWithIcon: {marginLeft: 0, marginRight: 15},
   iconInBtn: {width: 23, height: 23},
+  popupHeaderText: {
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  popupItem: {
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    marginTop: 10,
+  },
+  popupItemText: {
+    fontSize: 20,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

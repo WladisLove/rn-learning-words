@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const VocabularyList = ({vocabularies = {}, onPress}) => {
+const VocabularyList = ({vocabularies = {}, onPress, onLongPress}) => {
   const pressHandler = id => () => onPress(id);
+  const longPressHandler = id => () => onLongPress(id);
 
   let items = [];
   for (let [id, item] of Object.entries(vocabularies)) {
@@ -33,6 +34,7 @@ const VocabularyList = ({vocabularies = {}, onPress}) => {
       <TouchableOpacity
         key={id}
         onPress={pressHandler(id)}
+        onLongPress={longPressHandler(id)}
         style={styles.container}>
         <Text style={styles.text}>{item.name}</Text>
         <Image source={arrowRight} style={styles.icon} />

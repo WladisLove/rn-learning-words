@@ -1,11 +1,19 @@
-import React from 'react';
-import {SafeAreaView, ScrollView, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
 import VocabularyModal from '../../components/modals/VocabularyModal';
 import ButtonIcon from '../../components/ButtonIcon';
+import Popup from '../../components/popups/Popup';
 import {routes} from '../index';
-import {loadVocabulary} from '../../helpers';
+import {loadVocabulary, isIOS} from '../../helpers';
 import useModal from '../../helpers/useModal';
 import addIcon from '../../assets/plus.png';
 import uploadIcon from '../../assets/upload.png';
@@ -16,22 +24,49 @@ const iBtnStyle = {
   iconStyle: styles.iconInBtn,
 };
 
-const Home = ({vocabularies, setVocabulary, navigation}) => {
+const Home = ({vocabularies, setVoc, deleteVoc, navigation}) => {
   const [modalVisible, showModal, closeModal] = useModal(false);
+  const [popupVisible, openPopup, closePopup] = useModal(false);
+  const [selectedVocId, setVocId] = useState(null);
 
-  const onPressVocabulary = vocabularyId =>
+  const onClosePopup = () => {
+    closePopup();
+    setVocId(null);
+  };
+
+  const onPressVoc = vocabularyId =>
     navigation.navigate(routes.VOCABULARY, {vocabularyId});
 
-  const onSaveVocabulary = voc => {
-    setVocabulary(voc);
+  const onLongPressVoc = vocId => {
+    openPopup();
+    setVocId(vocId);
+  };
+
+  const onSaveVoc = voc => {
+    setVoc(voc);
     closeModal();
   };
 
   const onLoadVoc = () => {
     // TODO: add loading state while processing new vocabulary
     const finishLoading = () => console.log('finished');
-    loadVocabulary(Object.keys(vocabularies), setVocabulary, finishLoading);
+    loadVocabulary(Object.keys(vocabularies), setVoc, finishLoading);
   };
+
+  const deleteVocHandler = () => {
+    deleteVoc(selectedVocId);
+    onClosePopup();
+  };
+
+  const onDeleteVoc = () =>
+    Alert.alert(
+      'Do you want to delete vocabulary?',
+      vocabularies[selectedVocId]?.name,
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Delete', onPress: deleteVocHandler},
+      ],
+    );
 
   return (
     <>
@@ -53,14 +88,29 @@ const Home = ({vocabularies, setVocabulary, navigation}) => {
             <View style={styles.splitLine} />
             <VocabularyList
               vocabularies={vocabularies}
-              onPress={onPressVocabulary}
+              onPress={onPressVoc}
+              onLongPress={onLongPressVoc}
             />
           </View>
         </ScrollView>
       </SafeAreaView>
+      <Popup visible={popupVisible} onClose={onClosePopup}>
+        <Text>popup</Text>
+        <TouchableOpacity>
+          <Text>Rename</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onDeleteVoc}>
+          <Text>Delete</Text>
+        </TouchableOpacity>
+        {!isIOS && (
+          <TouchableOpacity>
+            <Text>Download</Text>
+          </TouchableOpacity>
+        )}
+      </Popup>
       <VocabularyModal
         visible={modalVisible}
-        onSave={onSaveVocabulary}
+        onSave={onSaveVoc}
         onClose={closeModal}
         items={vocabularies}
       />

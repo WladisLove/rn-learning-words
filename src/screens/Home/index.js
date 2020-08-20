@@ -1,14 +1,15 @@
 import {connect} from 'react-redux';
 import Home from './Home';
-import {setVocabulary} from '../../actions/vocabulary';
+import {setVocabulary, deleteVocabulary} from '../../actions/vocabulary';
 
 const mapStateToProps = ({vocStore: {vocabularies}}) => ({
   vocabularies,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setVocabulary: item => dispatch(setVocabulary(item)),
+    setVoc: item => dispatch(setVocabulary(item)),
+    deleteVoc: id => dispatch(deleteVocabulary(id)),
   };
 };
 

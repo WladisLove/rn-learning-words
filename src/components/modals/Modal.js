@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     marginVertical: 40,
     paddingHorizontal: 10,
     paddingVertical: 20,
+    borderRadius: 5,
   },
   prefixContainer: {
     position: 'relative',

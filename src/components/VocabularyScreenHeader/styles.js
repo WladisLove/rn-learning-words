@@ -1,5 +1,12 @@
 import {StyleSheet} from 'react-native';
 
+const iconBtnWidth = 23;
+const iconBtnPadding = 5;
+const iconBtnRightMargin = 12;
+
+export const iconBtnCompleteWidth =
+  iconBtnWidth + iconBtnRightMargin + iconBtnPadding * 2;
+
 const actionsContainerStyle = {
   flexDirection: 'row',
   alignItems: 'center',
@@ -39,9 +46,19 @@ export const headerStyles = StyleSheet.create({
     maxHeight: 52,
   },
   vocActionsContainer: actionsContainerStyle,
-  btn: {marginLeft: 0, marginRight: 15},
-  btnIcon: {width: 23, height: 23},
+  btn: {
+    marginLeft: 0,
+    marginRight: iconBtnRightMargin,
+    padding: iconBtnPadding,
+  },
+  btnIcon: {width: iconBtnWidth, height: 23},
   addWordBtnWrapper: {flex: 1, alignItems: 'flex-end'},
+  verticalSeparator: {
+    marginRight: iconBtnRightMargin,
+    backgroundColor: 'black',
+    width: 1,
+    height: 26,
+  },
 });
 
 export const formStyles = StyleSheet.create({

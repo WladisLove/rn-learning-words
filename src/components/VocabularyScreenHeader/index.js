@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Animated} from 'react-native';
 import VocabularyNameForm from './VocabularyNameForm';
 import ButtonIcon from '../ButtonIcon';
 import SearchInput from '../SearchInput';
@@ -10,9 +10,10 @@ import deleteIcon from '../../assets/delete.png';
 import runIcon from '../../assets/run.png';
 import findIcon from '../../assets/find.png';
 import downloadIcon from '../../assets/download.png';
+import ellipsisIcon from '../../assets/ellipsis.png';
 import addIcon from '../../assets/plus.png';
 
-import {headerStyles as styles} from './styles';
+import {headerStyles as styles, iconBtnCompleteWidth} from './styles';
 
 const iconBtnStyle = {
   style: styles.btn,
@@ -34,12 +35,36 @@ const VocabularyScreenHeader = ({
   const turnEditableOn = () => setIsEditable(true);
   const turnEditableOff = () => setIsEditable(false);
 
+  const [animatingVal] = useState(new Animated.Value(0));
+
+  const [isActionsShown, setActionsShown] = useState(false);
+  const showMoreActions = () => {
+    setActionsShown(true);
+    Animated.timing(animatingVal, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   const turnFindModeOn = () => setSearchQuery('');
 
   const editHandler = (name, id) => {
     onEdit(name, id);
     turnEditableOff();
   };
+
+  const additionalActions = [
+    {key: 'edit', src: editIcon, onPress: turnEditableOn},
+    {key: 'delete', src: deleteIcon, onPress: onDelete},
+  ];
+  if (!isIOS) {
+    additionalActions.push({
+      key: 'download',
+      src: downloadIcon,
+      onPress: onDownload,
+    });
+  }
 
   return (
     <View style={styles.headerContainer}>
@@ -59,30 +84,74 @@ const VocabularyScreenHeader = ({
             <View style={styles.vocActionsContainer}>
               {searchQuery === null ? (
                 <>
-                  <ButtonIcon
-                    src={editIcon}
-                    onPress={turnEditableOn}
-                    {...iconBtnStyle}
-                  />
                   <ButtonIcon src={runIcon} onPress={onRun} {...iconBtnStyle} />
                   <ButtonIcon
                     src={findIcon}
                     onPress={turnFindModeOn}
                     {...iconBtnStyle}
                   />
-                  {!isIOS && (
+                  <ButtonIcon src={addIcon} onPress={onAdd} {...iconBtnStyle} />
+                  <View style={styles.verticalSeparator} />
+                  {isActionsShown && (
+                    <Animated.View
+                      style={[
+                        styles.vocActionsContainer,
+                        {
+                          marginTop: 0,
+                          transform: [
+                            {
+                              translateX: animatingVal.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [
+                                  -additionalActions.length *
+                                    iconBtnCompleteWidth,
+                                  0,
+                                ],
+                              }),
+                            },
+                          ],
+                          opacity: animatingVal.interpolate({
+                            inputRange: [0, 0.4, 1],
+                            outputRange: [0, 0, 1],
+                          }),
+                        },
+                      ]}>
+                      {additionalActions.map(el => (
+                        <ButtonIcon {...el} {...iconBtnStyle} />
+                      ))}
+                    </Animated.View>
+                  )}
+                  <Animated.View
+                    style={[
+                      styles.vocActionsContainer,
+                      {
+                        marginTop: 0,
+                        opacity: animatingVal.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [1, 0],
+                        }),
+                      },
+                      isActionsShown && {
+                        transform: [
+                          {
+                            translateX: animatingVal.interpolate({
+                              inputRange: [0, 1],
+                              outputRange: [
+                                -additionalActions.length *
+                                  iconBtnCompleteWidth,
+                                0,
+                              ],
+                            }),
+                          },
+                        ],
+                      },
+                    ]}>
                     <ButtonIcon
-                      src={downloadIcon}
-                      onPress={onDownload}
+                      src={ellipsisIcon}
+                      onPress={showMoreActions}
                       {...iconBtnStyle}
                     />
-                  )}
-                  <ButtonIcon
-                    src={deleteIcon}
-                    onPress={onDelete}
-                    {...iconBtnStyle}
-                  />
-                  <ButtonIcon src={addIcon} onPress={onAdd} {...iconBtnStyle} />
+                  </Animated.View>
                 </>
               ) : (
                 <SearchInput

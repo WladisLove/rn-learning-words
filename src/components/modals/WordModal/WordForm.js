@@ -86,7 +86,7 @@ const WordForm = ({word, onSave, isLandscape}) => {
                         style={mainFieldsStyle.field}
                         {...fieldProps}
                         {...conf.inputProps}
-                        autoCapitalize={false}
+                        autoCapitalize="none"
                       />
                     )}
                   </Field>

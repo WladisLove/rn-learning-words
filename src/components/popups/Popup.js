@@ -29,11 +29,10 @@ const Popup = ({visible, onClose, style = {}, children}) => {
       visible={visible}
       onRequestClose={onClose}
       supportedOrientations={['portrait', 'landscape']}>
-      <TouchableOpacity
-        style={styles.root}
-        activeOpacity={1}
-        onPressOut={onClose}>
-        <View style={[styles.wrapper, style]}>{children}</View>
+      <TouchableOpacity style={styles.root} activeOpacity={1} onPress={onClose}>
+        <TouchableOpacity activeOpacity={1} style={[styles.wrapper, style]}>
+          {children}
+        </TouchableOpacity>
       </TouchableOpacity>
     </Modal>
   );

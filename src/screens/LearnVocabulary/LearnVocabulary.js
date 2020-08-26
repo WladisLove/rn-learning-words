@@ -109,7 +109,9 @@ const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
                 <Text style={styles.title}>Synonyms</Text>
                 {word.synonyms ? (
                   <View style={styles.card}>
-                    <Text style={styles.text}>{word.synonyms}</Text>
+                    <Text style={styles.text} selectable>
+                      {word.synonyms}
+                    </Text>
                   </View>
                 ) : (
                   emptyCard
@@ -121,7 +123,7 @@ const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
                 {word.context ? (
                   <View style={styles.card}>
                     {word.context.split('\n').map(item => (
-                      <Text key={item} style={styles.contextText}>
+                      <Text key={item} style={styles.contextText} selectable>
                         - {item}
                       </Text>
                     ))}

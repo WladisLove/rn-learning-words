@@ -41,7 +41,7 @@ const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
             <Text style={styles.sectionTitle}>
               - {name.charAt(0).toUpperCase() + name.slice(1)}
             </Text>
-            <Text style={styles.sectionText}>{word[name]}</Text>
+            <Text style={styles.sectionText} selectable>{word[name]}</Text>
           </View>
         ) : null;
       })}

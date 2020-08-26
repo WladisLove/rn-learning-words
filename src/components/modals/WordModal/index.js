@@ -5,9 +5,8 @@ import WordInfoArea from './WordInfoArea';
 import ButtonLvl from '../../ButtonLvl';
 import WordLvlPopup from '../../popups/WordLvlPopup';
 import useModal from '../../../helpers/useModal';
+import {DEFAULT_WORD_LVL} from '../../../constants';
 import {modalStyles as styles} from './styles';
-
-const DEFAULT_WORD_LVL = 2;
 
 const WordModal = props => {
   const {

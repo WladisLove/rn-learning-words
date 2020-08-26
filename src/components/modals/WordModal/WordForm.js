@@ -4,6 +4,7 @@ import {Form, Field} from 'react-final-form';
 import FormInput from '../../FormInput';
 
 import {generateWordID} from '../../../helpers';
+import {DEFAULT_WORD_LVL} from '../../../constants';
 import {formStyles as styles} from './styles';
 
 const mainFields = ['word', 'meaning'];
@@ -50,7 +51,11 @@ const WordForm = ({word, onSave, isLandscape}) => {
   // TODO: add submit from input (by keyboard)
   // TODO: add focus on next field after completing current
   const onSubmit = values =>
-    onSave({...values, id: witWord ? word.id : generateWordID(values.word)});
+    onSave({
+      ...values,
+      lvl: word?.lvl ?? DEFAULT_WORD_LVL,
+      id: witWord ? word.id : generateWordID(values.word),
+    });
 
   const mainFieldsStyle = isLandscape
     ? {

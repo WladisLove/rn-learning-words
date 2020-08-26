@@ -1,17 +1,10 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import {SafeAreaView, ScrollView, View, Text, Alert} from 'react-native';
 import AppMotto from '../../components/AppMotto';
 import VocabularyList from '../../components/VocabularyList';
 import VocabularyModal from '../../components/modals/VocabularyModal';
 import ButtonIcon from '../../components/ButtonIcon';
-import Popup from '../../components/popups/Popup';
+import ActionsPopup from '../../components/popups/ActionsPopup';
 import {routes} from '../index';
 import {loadVocabulary, isIOS, downloadVocabulary} from '../../helpers';
 import useModal from '../../helpers/useModal';
@@ -81,6 +74,21 @@ const Home = ({vocabularies, setVoc, deleteVoc, changeVocName, navigation}) => {
       text => Alert.alert('Write error!', `${text}`),
     );
 
+  const popupActions = [
+    {
+      name: 'Rename',
+      handler: onRenameVoc,
+    },
+    {
+      name: 'Delete',
+      handler: onDeleteVoc,
+    },
+    !isIOS && {
+      name: 'Download',
+      handler: onDownload,
+    },
+  ];
+
   return (
     <>
       <SafeAreaView style={styles.root}>
@@ -107,25 +115,19 @@ const Home = ({vocabularies, setVoc, deleteVoc, changeVocName, navigation}) => {
           </View>
         </ScrollView>
       </SafeAreaView>
-      <Popup visible={popupVisible} onClose={onClosePopup}>
-        <Text style={styles.popupHeaderText}>
-          Actions with vocabulary{' '}
-          <Text style={{fontWeight: '700'}}>
-            {vocabularies[selectedVocId]?.name}
-          </Text>
-        </Text>
-        <TouchableOpacity onPress={onRenameVoc} style={styles.popupItem}>
-          <Text style={styles.popupItemText}>Rename</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onDeleteVoc} style={styles.popupItem}>
-          <Text style={styles.popupItemText}>Delete</Text>
-        </TouchableOpacity>
-        {!isIOS && (
-          <TouchableOpacity onPress={onDownload} style={styles.popupItem}>
-            <Text style={styles.popupItemText}>Download</Text>
-          </TouchableOpacity>
-        )}
-      </Popup>
+      <ActionsPopup
+        visible={popupVisible}
+        onClose={onClosePopup}
+        actions={popupActions}
+        textHeader={
+          <>
+            Actions with vocabulary{' '}
+            <Text style={{fontWeight: '700'}}>
+              {vocabularies[selectedVocId]?.name}
+            </Text>
+          </>
+        }
+      />
       <VocabularyModal
         visible={modalVisible}
         onSave={onSaveVoc}

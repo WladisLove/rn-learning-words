@@ -2,7 +2,8 @@ import {StyleSheet} from 'react-native';
 import {red} from '../../../color';
 
 export const modalStyles = StyleSheet.create({
-  contentL: {maxWidth: 500, marginVertical: 30, paddingTop: 40},
+  content: {paddingBottom: 10},
+  contentL: {maxWidth: 500, marginVertical: 30},
   lvlBtn: {borderRadius: 5},
 });
 

@@ -71,7 +71,7 @@ const WordModal = props => {
           style={styles.lvlBtn}
         />
       }
-      contentStyle={isLandscape ? styles.contentL : {}}
+      contentStyle={[styles.content, isLandscape && styles.contentL]}
       {...modalBtnConfig}>
       {editable ? (
         <WordForm
@@ -82,7 +82,6 @@ const WordModal = props => {
       ) : (
         <WordInfoArea word={word} onEdit={onStartEdit} onDelete={onDelete} />
       )}
-
       <WordLvlPopup
         visible={lvlModalVisible}
         onClose={closeLvlModal}

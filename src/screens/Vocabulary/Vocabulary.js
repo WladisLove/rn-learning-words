@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View, Alert} from 'react-native';
+import {SafeAreaView, View, Text, Alert} from 'react-native';
 import ButtonLvl from '../../components/ButtonLvl';
 import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
+import ActionsPopup from '../../components/popups/ActionsPopup';
 import useModal from '../../helpers/useModal';
 import {downloadVocabulary} from '../../helpers';
 import {routes} from '../index';
@@ -22,9 +23,15 @@ const Vocabulary = ({
 }) => {
   const {words = {}} = vocabulary;
   const [wordModalVisible, openWordModal, closeWordModal] = useModal(false);
+  const [popupVisible, openPopup, closePopup] = useModal(false);
   const [selectedWordID, selectWordID] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
   const [wordsLvl, setWordsLvl] = useState(0);
+
+  const onClosePopup = () => {
+    closePopup();
+    selectWordID(null);
+  };
 
   const goBack = () => navigation.goBack();
   const deleteHandler = () => {
@@ -50,6 +57,7 @@ const Vocabulary = ({
 
   const onCloseWord = () => {
     closeWordModal();
+    closePopup();
     selectWordID(null);
   };
 
@@ -75,6 +83,11 @@ const Vocabulary = ({
     openWordModal();
   };
 
+  const onWordLongPressVoc = vocId => {
+    openPopup();
+    selectWordID(vocId);
+  };
+
   const onLvlSelect = lvl => () => setWordsLvl(lvl);
 
   const selectedWord = selectedWordID ? words[selectedWordID] : null;
@@ -82,6 +95,25 @@ const Vocabulary = ({
     wordsLvl === 0
       ? Object.values(words)
       : Object.values(words).filter(({lvl = 2}) => lvl === wordsLvl);
+
+  const popupActions = [
+    {
+      name: 'Edit',
+      handler: () => {},
+    },
+    {
+      name: 'Delete',
+      handler: onDeleteWord,
+    },
+    {
+      name: 'Change lvl',
+      handler: () => {},
+    },
+    {
+      name: 'Move',
+      handler: () => {},
+    },
+  ];
 
   return (
     <>
@@ -110,10 +142,24 @@ const Vocabulary = ({
         </View>
         <WordsList
           items={sortedWords}
-          onWordPress={onWordPress}
+          onPress={onWordPress}
+          onLongPress={onWordLongPressVoc}
           searchQuery={searchQuery}
         />
       </SafeAreaView>
+      <ActionsPopup
+        visible={popupVisible}
+        onClose={onClosePopup}
+        actions={popupActions}
+        textHeader={
+          <>
+            Actions with word{' '}
+            <Text style={{fontWeight: '700'}}>
+              {words[selectedWordID]?.word}
+            </Text>
+          </>
+        }
+      />
       <WordModal
         visible={wordModalVisible}
         word={selectedWord}

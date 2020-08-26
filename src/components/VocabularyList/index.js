@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const VocabularyList = ({vocabularies = {}, onPress, onLongPress}) => {
+const VocabularyList = ({
+  vocabularies = {},
+  onPress = () => {},
+  onLongPress = () => {},
+}) => {
   const pressHandler = id => () => onPress(id);
   const longPressHandler = id => () => onLongPress(id);
 

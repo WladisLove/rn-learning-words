@@ -32,7 +32,12 @@ const styles = StyleSheet.create({
   meaning: {flex: 0.44, textAlign: 'right'},
 });
 
-const WordsList = ({items = [], searchQuery, onWordPress = () => {}}) => {
+const WordsList = ({
+  items = [],
+  searchQuery,
+  onPress = () => {},
+  onLongPress = () => {},
+}) => {
   let q;
   const data =
     searchQuery &&
@@ -51,7 +56,8 @@ const WordsList = ({items = [], searchQuery, onWordPress = () => {}}) => {
       renderItem={({item}) => (
         <TouchableOpacity
           style={styles.listItem}
-          onPress={onWordPress.bind(null, item.id)}>
+          onPress={onPress.bind(null, item.id)}
+          onLongPress={onLongPress.bind(null, item.id)}>
           <Text
             style={[styles.text, styles.word]}
             numberOfLines={3}

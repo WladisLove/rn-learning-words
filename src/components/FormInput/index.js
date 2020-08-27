@@ -7,7 +7,7 @@ const LINE_H = 21;
 const styles = StyleSheet.create({
   fieldContainer: {
     position: 'relative',
-    paddingBottom: 23,
+    marginBottom: 10,
   },
   textInput: {
     backgroundColor: silver,
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderColor: gray,
     borderWidth: 1,
+    borderRadius: 3,
   },
   defaultMultipletextInput: {
     height: 'auto',

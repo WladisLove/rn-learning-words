@@ -9,6 +9,11 @@ export const modalStyles = StyleSheet.create({
 
 export const formStyles = StyleSheet.create({
   errorTip: {color: red, fontSize: 16},
-  mainFieldsContainerL: {flexDirection: 'row', justifyContent: 'space-between'},
+  mainFieldsContainer: {marginBottom: 10},
+  mainFieldsContainerL: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
   mainFieldL: {flex: 0.49},
 });

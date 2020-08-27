@@ -62,7 +62,7 @@ const WordForm = ({word, onSave, isLandscape}) => {
         container: styles.mainFieldsContainerL,
         field: styles.mainFieldL,
       }
-    : {};
+    : {container: styles.mainFieldsContainer};
 
   return (
     <Form

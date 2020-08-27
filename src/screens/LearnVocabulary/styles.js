@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {green_light, silver} from '../../color';
+import {green_light, silver, gray_icon} from '../../color';
 
 const styles = StyleSheet.create({
   root: {backgroundColor: green_light, flex: 1},
@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backBtnWrapperL: {marginTop: 5},
+  backBtnText: {color: gray_icon, fontSize: 14},
+  backBtnIcon: {transform: [{rotate: '180deg'}]},
   showRestMarging: {marginTop: 15},
   secFieldsArea: {
     paddingHorizontal: 40,

@@ -7,6 +7,7 @@ import ButtonLvl from '../../components/ButtonLvl';
 import WordLvlPopup from '../../components/popups/WordLvlPopup';
 import useModal from '../../helpers/useModal';
 import styles from './styles';
+import arrowRight from '../../assets/arrow-right.png';
 
 const showModes = ['Word', 'Meaning', 'All'];
 
@@ -77,7 +78,13 @@ const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
               styles.backBtnWrapper,
               isLandscape && styles.backBtnWrapperL,
             ]}>
-            <Button onPress={goBack}>Back</Button>
+            <Button
+              onPress={goBack}
+              icon={arrowRight}
+              textStyle={styles.backBtnText}
+              iconStyle={styles.backBtnIcon}>
+              Back
+            </Button>
             <Picker
               text="Show:"
               value={mode}

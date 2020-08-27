@@ -1,4 +1,5 @@
 export const gray = '#808080';
+export const gray_icon = '#4d4d4d';
 export const silver = '#f6f6f6';
 export const red = 'red';
 export const black = 'black';

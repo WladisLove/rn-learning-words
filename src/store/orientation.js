@@ -10,6 +10,7 @@ export default function reducer(state = {}, action = {}) {
             ? state.isLandscape
             : action.isLandscape,
         screenW: action.screenW || state.screenW,
+        screenH: action.screenH || state.screenH,
       };
     default:
       return state;

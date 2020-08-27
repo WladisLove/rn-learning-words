@@ -30,3 +30,10 @@ export const deleteWord = (id, vocabularyId) => ({
   vocabularyId,
   id,
 });
+
+export const moveWord = (id, fromVocId, toVocId) => ({
+  type: aTypes.WORD_MOVE,
+  fromVocId,
+  toVocId,
+  id,
+});

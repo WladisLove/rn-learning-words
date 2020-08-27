@@ -8,7 +8,11 @@ const OrientationTracker = ({isLandscape, screenW, setInfoHandler}) => {
     const {width, height} = Dimensions.get('window');
     const _isLandscape = width > height;
     isLandscape !== _isLandscape &&
-      setInfoHandler({isLandscape: _isLandscape, screenW: width});
+      setInfoHandler({
+        isLandscape: _isLandscape,
+        screenW: width,
+        screenH: height,
+      });
   };
 
   if (isLandscape === undefined || !screenW) {

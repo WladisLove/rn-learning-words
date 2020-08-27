@@ -1,7 +1,15 @@
 import aTypes from '../actions/actionTypes';
+import {DEFAULT_WORD_LVL} from '../constants';
 
 const initialState = {
   vocabularies: {},
+};
+
+const deleteWordFromVoc = (state, vocId, wordId) => {
+  const newWords = {...state.vocabularies[vocId].words};
+  const deletedWord = newWords[wordId];
+  delete newWords[wordId];
+  return [newWords, deletedWord];
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -47,13 +55,28 @@ export default function reducer(state = initialState, action = {}) {
       };
     case aTypes.WORD_DELETE: {
       const {vocabularyId: vocId, id} = action;
-      const newWords = {...state.vocabularies[vocId].words};
-      delete newWords[id];
+      const [newWords] = deleteWordFromVoc(state, vocId, id);
       return {
         ...state,
         vocabularies: {
           ...state.vocabularies,
           [vocId]: {...state.vocabularies[vocId], words: newWords},
+        },
+      };
+    }
+    case aTypes.WORD_MOVE: {
+      const {fromVocId, toVocId, id} = action;
+      const [newWords, word] = deleteWordFromVoc(state, fromVocId, id);
+      word.lvl = DEFAULT_WORD_LVL;
+      return {
+        ...state,
+        vocabularies: {
+          ...state.vocabularies,
+          [fromVocId]: {...state.vocabularies[fromVocId], words: newWords},
+          [toVocId]: {
+            ...state.vocabularies[toVocId],
+            words: {...state.vocabularies[toVocId].words, [id]: word},
+          },
         },
       };
     }

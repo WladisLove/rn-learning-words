@@ -1,5 +1,6 @@
 import React from 'react';
-import {Modal, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Modal, TouchableOpacity, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import {gray} from '../../color';
 
 const styles = StyleSheet.create({
@@ -21,7 +22,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const Popup = ({visible, onClose, style = {}, children}) => {
+const Popup = ({visible, onClose, style = {}, children, screenH}) => {
+  const wrapperStyles = [
+    styles.wrapper,
+    screenH && {maxHeight: screenH - 30},
+    style,
+  ];
   return (
     <Modal
       animationType="none"
@@ -30,7 +36,7 @@ const Popup = ({visible, onClose, style = {}, children}) => {
       onRequestClose={onClose}
       supportedOrientations={['portrait', 'landscape']}>
       <TouchableOpacity style={styles.root} activeOpacity={1} onPress={onClose}>
-        <TouchableOpacity activeOpacity={1} style={[styles.wrapper, style]}>
+        <TouchableOpacity activeOpacity={1} style={wrapperStyles}>
           {children}
         </TouchableOpacity>
       </TouchableOpacity>
@@ -38,4 +44,8 @@ const Popup = ({visible, onClose, style = {}, children}) => {
   );
 };
 
-export default Popup;
+const mapStateToProps = ({orientStore}) => ({
+  screenH: orientStore.screenH,
+});
+
+export default connect(mapStateToProps)(Popup);

@@ -5,6 +5,7 @@ import WordModal from '../../components/modals/WordModal';
 import VocabularyScreenHeader from '../../components/VocabularyScreenHeader';
 import WordsList from '../../components/WordsList';
 import ActionsPopup from '../../components/popups/ActionsPopup';
+import VocListPopup from '../../components/popups/VocListPopup';
 import useModal from '../../helpers/useModal';
 import {downloadVocabulary} from '../../helpers';
 import {routes} from '../index';
@@ -14,22 +15,30 @@ import styles from './styles';
 const Vocabulary = ({
   vocabulary = {},
   vocabularyId,
+  vocList,
   isLandscape,
   navigation,
   deleteVocabulary,
   changeVocabularyName,
   setWord,
   deleteWord,
+  moveWord,
 }) => {
   const {words = {}} = vocabulary;
   const [wordModalVisible, openWordModal, closeWordModal] = useModal(false);
-  const [popupVisible, openPopup, closePopup] = useModal(false);
+  const [actionsVisible, openActions, closeActions] = useModal(false);
+  const [vocListVisible, openVocList, closeVocList] = useModal(false);
   const [selectedWordID, selectWordID] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
   const [wordsLvl, setWordsLvl] = useState(0);
 
-  const onClosePopup = () => {
-    closePopup();
+  const onCloseActionsPopup = () => {
+    closeActions();
+    selectWordID(null);
+  };
+
+  const onCloseVocListPopup = () => {
+    closeVocList();
     selectWordID(null);
   };
 
@@ -57,7 +66,7 @@ const Vocabulary = ({
 
   const onCloseWord = () => {
     closeWordModal();
-    closePopup();
+    closeActions();
     selectWordID(null);
   };
 
@@ -84,11 +93,24 @@ const Vocabulary = ({
   };
 
   const onWordLongPressVoc = vocId => {
-    openPopup();
+    openActions();
     selectWordID(vocId);
   };
 
-  const onLvlSelect = lvl => () => setWordsLvl(lvl);
+  const onEditAction = () => {
+    closeActions();
+    openWordModal();
+  };
+
+  const onShowVocList = () => {
+    closeActions();
+    openVocList();
+  };
+
+  const onMoveWord = toVocId => {
+    moveWord(selectedWordID, vocabularyId, toVocId);
+    onCloseVocListPopup();
+  };
 
   const selectedWord = selectedWordID ? words[selectedWordID] : null;
   const sortedWords =
@@ -99,7 +121,7 @@ const Vocabulary = ({
   const popupActions = [
     {
       name: 'Edit',
-      handler: () => {},
+      handler: onEditAction,
     },
     {
       name: 'Delete',
@@ -111,7 +133,7 @@ const Vocabulary = ({
     },
     {
       name: 'Move',
-      handler: () => {},
+      handler: onShowVocList,
     },
   ];
 
@@ -135,7 +157,7 @@ const Vocabulary = ({
               key={lvl}
               lvl={lvl}
               selectedLvl={wordsLvl}
-              onPress={onLvlSelect(lvl)}
+              onPress={setWordsLvl.bind(null, lvl)}
               style={styles.lvlBtn}
             />
           ))}
@@ -148,17 +170,23 @@ const Vocabulary = ({
         />
       </SafeAreaView>
       <ActionsPopup
-        visible={popupVisible}
-        onClose={onClosePopup}
+        visible={actionsVisible}
+        onClose={onCloseActionsPopup}
         actions={popupActions}
         textHeader={
           <>
             Actions with word{' '}
-            <Text style={{fontWeight: '700'}}>
-              {words[selectedWordID]?.word}
-            </Text>
+            <Text style={styles.bold}>{selectedWord?.word}</Text>
           </>
         }
+      />
+      <VocListPopup
+        visible={vocListVisible}
+        onSelectVoc={onMoveWord}
+        onClose={onCloseVocListPopup}
+        selectedWord={selectedWord}
+        vocList={vocList}
+        vocId={vocabularyId}
       />
       <WordModal
         visible={wordModalVisible}

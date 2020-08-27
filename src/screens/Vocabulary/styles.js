@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: green_light,
   },
   lvlBtn: {flex: 1},
+  bold: {fontWeight: '700'},
 });
 
 export default styles;

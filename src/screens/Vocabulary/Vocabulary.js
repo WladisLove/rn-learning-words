@@ -128,10 +128,6 @@ const Vocabulary = ({
       handler: onDeleteWord,
     },
     {
-      name: 'Change lvl',
-      handler: () => {},
-    },
-    {
       name: 'Move',
       handler: onShowVocList,
     },

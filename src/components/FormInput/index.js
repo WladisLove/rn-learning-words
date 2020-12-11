@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
   errorInput: {borderColor: red},
   tooltip: {
     position: 'absolute',
-    bottom: 5,
+    bottom: -15,
     right: 0,
     color: red,
-    fontSize: 15,
-    lineHeight: 15,
+    fontSize: 14,
+    lineHeight: 14,
   },
 });
 

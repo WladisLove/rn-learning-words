@@ -46,7 +46,6 @@ const VocabularyNameForm = ({
                   submitError={submitError}
                   style={styles.field}
                   inputStyle={styles.input}
-                  tooltipStyle={styles.tooltip}
                   autoFocus
                 />
               )}

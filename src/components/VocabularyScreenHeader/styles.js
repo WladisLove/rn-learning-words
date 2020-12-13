@@ -64,6 +64,5 @@ export const headerStyles = StyleSheet.create({
 export const formStyles = StyleSheet.create({
   field: {paddingTop: 0, paddingBottom: 0},
   input: {backgroundColor: 'transparent'},
-  tooltip: {top: 3},
   vocActionsContainer: actionsContainerStyle,
 });

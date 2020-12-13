@@ -9,7 +9,8 @@ import {generateVocabularyID, isVocIdUnique} from '../../../helpers';
 import {red} from '../../../color';
 
 const styles = StyleSheet.create({
-  errorTip: {color: red, fontSize: 16},
+  input: {paddingBottom: 20},
+  errorTip: {color: red, fontSize: 16, bottom: 1},
 });
 
 const VocabularyModal = ({visible, items, onSave, onClose, initialValues}) => {
@@ -55,12 +56,12 @@ const VocabularyModal = ({visible, items, onSave, onClose, initialValues}) => {
                     onSubmitEditing={handleSubmit}
                     returnKeyType="done"
                     autoFocus
+                    submitError={submitError}
+                    tooltipStyle={styles.errorTip}
+                    style={styles.input}
                   />
                 )}
               </Field>
-              {submitError && (
-                <Text style={styles.errorTip}>{submitError}</Text>
-              )}
             </>
           );
         }}

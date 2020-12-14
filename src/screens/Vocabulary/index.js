@@ -15,7 +15,7 @@ const mapStateToProps = (
   const {vocabularyId} = params;
   const vocList = Object.entries(vocabularies).reduce((acc, [id, voc]) => {
     return vocabularyId === id ? acc : [...acc, {id, name: voc.name}];
-  }, []);
+  }, []).sort();
   return {
     vocabulary: vocabularies[vocabularyId],
     vocabularyId,

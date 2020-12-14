@@ -18,11 +18,10 @@ const styles = StyleSheet.create({
     width: 45,
     textAlign: 'center',
   },
-  fstSection: {marginTop: 15},
-  section: {marginBottom: 12},
+  section: {marginTop: 12},
   sectionTitle: {fontSize: 14, marginBottom: 5, paddingLeft: 10},
   sectionText: {fontSize: 18},
-  btnContainer: {flexDirection: 'row', justifyContent: 'flex-end'},
+  btnContainer: {flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12},
 });
 
 const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
@@ -37,7 +36,7 @@ const WordInfoArea = ({word = {}, onEdit, onDelete}) => {
         return word[name] ? (
           <View
             key={name}
-            style={[styles.section, i === 0 && styles.fstSection]}>
+            style={styles.section}>
             <Text style={styles.sectionTitle}>
               - {name.charAt(0).toUpperCase() + name.slice(1)}
             </Text>

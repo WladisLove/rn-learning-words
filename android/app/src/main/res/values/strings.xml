@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Learning Words</string>
+    <string name="CodePushDeploymentKey" moduleConfig="true">zy-drhmNmhevrLwlcv6y2xjsgd90I7FQBE5Mm</string>
+    <string name="CodePushPublicKey">-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArlGT04k4Dp8RXDvW/ZFX
+5bamoHDnKLXxNGeqcDWCTa+ABARTU79PdrZDBZWjQ12WKN+ldCa+BVZ6BYVq6MPu
+F27g6OmMaGJZlmlx4Dax9ra2UrWtWcD//BaQnJC6nkmJ9lOi6s+J3xp/H4D8OIOl
+mFBV8oyiRrOkD5LDKozp1Y7BAlRz9J7IhbdZIbtnk6MoClcofN3If0nHEXpcx1uY
+rlRy8A5LPlxx7t+gZrTIQxC+7rIsl/1r+EXMoIdBKZapHhlkbcfQ8O3i93LmULTV
+fq8cYE+OqN5SbzQb0TMP8mSnHkYWg85CZd39coy7tTqDilbYnkbMjehhJYyr/DRr
+HQIDAQAB
+-----END PUBLIC KEY-----</string>
 </resources>

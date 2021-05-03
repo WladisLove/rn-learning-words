@@ -72,10 +72,16 @@ const Vocabulary = ({
 
   const onUpdateWord = word => setWord(word, vocabularyId);
 
-  const onDeleteWord = () => {
+  const deleteWordHandler = () => {
     selectedWordID && deleteWord(selectedWordID, vocabularyId);
     onCloseWord();
   };
+
+  const onDeleteWord = () =>
+    Alert.alert('Do you want to delete word?', '', [
+      {text: 'Cancel', style: 'cancel'},
+      {text: 'Delete', onPress: deleteWordHandler},
+    ]);
 
   const onDownload = () =>
     downloadVocabulary(

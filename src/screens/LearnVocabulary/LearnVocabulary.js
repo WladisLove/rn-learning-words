@@ -17,15 +17,21 @@ const emptyCard = (
   </View>
 );
 
+const shuffleArr = arr => {
+  for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr
+}
+
 const LearnVocabulary = ({data = [], navigation, isLandscape, ...props}) => {
   const [mode, setMode] = useState(showModes[0]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isShown, setIsShown] = useState(false);
   const [lvlModalVisible, openLvlModal, closeLvlModal] = useModal(false);
   // don't change random order, when redux store is changed
-  const [_data, _setData] = useState(
-    [...data].sort((a, b) => 0.5 - Math.random()),
-  );
+  const [_data, _setData] = useState(shuffleArr(data.slice()));
 
   const onChangeMode = m => {
     setMode(m);
